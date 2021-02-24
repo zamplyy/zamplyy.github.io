@@ -18,6 +18,5 @@ module.exports = withPlugins([
   {
     assetPrefix: "/zamplyy/",
     basePath: "/zamplyy",
-    env,
   },
 ]);

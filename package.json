@@ -9,10 +9,16 @@
     "export": "next export"
   },
   "dependencies": {
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^8.0.0",
     "next": "^10.0.0",
     "next-compose-plugins": "^2.2.1",
     "next-optimized-images": "^2.6.2",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "svg-sprite-loader": "^5.2.1",
+    "webp-loader": "^0.6.0"
   }
 }
