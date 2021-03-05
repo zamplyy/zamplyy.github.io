@@ -1,24 +1,33 @@
 {
-  "name": "learn-starter",
-  "version": "0.1.0",
-  "private": true,
+  "name": "blog-starter-typescript",
+  "version": "1.0.0",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next",
     "build": "next build",
     "start": "next start",
-    "export": "next export"
+    "export": "next export",
+    "typecheck": "tsc"
   },
   "dependencies": {
-    "imagemin-gifsicle": "^7.0.0",
-    "imagemin-mozjpeg": "^9.0.0",
-    "imagemin-optipng": "^8.0.0",
-    "imagemin-svgo": "^8.0.0",
-    "next": "^10.0.0",
-    "next-compose-plugins": "^2.2.1",
-    "next-optimized-images": "^2.6.2",
-    "react": "17.0.1",
+    "classnames": "2.2.6",
+    "date-fns": "2.10.0",
+    "next": "latest",
+    "react": "^17.0.1",
     "react-dom": "17.0.1",
-    "svg-sprite-loader": "^5.2.1",
-    "webp-loader": "^0.6.0"
-  }
+    "react-player": "^2.9.0",
+    "react-responsive-carousel": "^3.2.13",
+    "typescript": "^4.0.3"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^5.5.0",
+    "@types/classnames": "^2.2.10",
+    "@types/jest": "^25.2.2",
+    "@types/node": "14.14.31",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.1",
+    "autoprefixer": "^10.2.1",
+    "postcss": "^8.2.4",
+    "tailwindcss": "^2.0.2"
+  },
+  "license": "MIT"
 }
