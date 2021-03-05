@@ -1,6 +1,4 @@
-const isProd = process.env.NODE_ENV === "production";
-
 module.exports = {
-  assetPrefix: isProd ? "/zamplyy/" : "",
-  basePath: isProd ? "/zamplyy" : "",
+  assetPrefix: "/zamplyy/",
+  basePath: "/zamplyy",
 };
