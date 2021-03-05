@@ -6,7 +6,6 @@ import ResponsivePlayer from "../components/responsivePlayer";
 import Card from "../components/card";
 import React, { CSSProperties } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Carousel } from "react-responsive-carousel";
 
 type Props = { title: string };
@@ -133,11 +132,9 @@ const Index = (props: Props) => {
                   >
                     <Card width={300} height={300}>
                       <div className="p-5 flex flex-col items-center justify-center flex-grow">
-                        <Image
+                        <img
                           src={`/assets/money${index}.jpg`}
                           alt={"Image from quote " + index}
-                          objectFit="cover"
-                          layout="fill"
                         />
                       </div>
                     </Card>
