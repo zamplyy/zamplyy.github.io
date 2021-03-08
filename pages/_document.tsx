@@ -19,6 +19,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Knewave&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&display=swap"
             media="print"
+            // @ts-ignore
             onLoad="this.media='all'"
           />
           <noscript>
