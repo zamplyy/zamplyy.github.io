@@ -4,12 +4,12 @@ const Footer = () => {
   return (
     <footer className="bg-accent-2">
       <Container>
-        <div className="py-14 px-14 flex w-1/2 justify-around">
+        <div className="py-14 lg:px-14 flex justify-around sm:justify-start sm:space-x-12">
           <div>
-            <h3 className="text-base font-semibold text-white py-3">
+            <h3 className="text-sm font-medium text-white py-3 sm:text-base">
               Ladda ner appen
             </h3>
-            <div className="flex space-x-4">
+            <div className="flex sm:space-x-4 space-x-1">
               <a href="https://play.google.com/store" target="_blank">
                 <img src={"/assets/icons/googleplay.svg"} />
               </a>
@@ -20,8 +20,10 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-base font-semibold text-white py-3">Kontakt</h3>
-            <div className="flex space-x-4">
+            <h3 className="text-sm font-medium text-white py-3 sm:text-base">
+              Kontakt
+            </h3>
+            <div className="flex sm:space-x-4 space-x-1">
               <a href="https://www.instagram.com/" target="_blank">
                 <img src={"/assets/icons/instagram.svg"} />
               </a>

@@ -10,10 +10,10 @@ const Index = () => {
         <Head>
           <title>Jag ångrar mig</title>
         </Head>
+        <Header />
         <Container>
-          <Header />
           <article>
-            <h1>jag ångrar mig</h1>
+            <h1 className="max-w-screen-lg lg:mx-auto">Jag ångrar mig</h1>
           </article>
         </Container>
       </Layout>

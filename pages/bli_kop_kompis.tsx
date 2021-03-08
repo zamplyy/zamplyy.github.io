@@ -10,10 +10,10 @@ const Index = () => {
         <Head>
           <title>Bli köpkompis</title>
         </Head>
+        <Header />
         <Container>
-          <Header />
           <article>
-            <h1>Bli köpkompis</h1>
+            <h1 className="max-w-screen-lg lg:mx-auto">Bli köpkompis</h1>
           </article>
         </Container>
       </Layout>

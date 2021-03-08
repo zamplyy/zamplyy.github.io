@@ -10,10 +10,10 @@ const Index = () => {
         <Head>
           <title>Spel</title>
         </Head>
+        <Header />
         <Container>
-          <Header />
           <article>
-            <h1>Spel</h1>
+            <h1 className="max-w-screen-lg lg:mx-auto">Spel</h1>
           </article>
         </Container>
       </Layout>

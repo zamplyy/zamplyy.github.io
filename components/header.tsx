@@ -16,7 +16,7 @@ const Header = (props: Props) => {
     { link: "/spel", title: "Spel" },
     { link: "/blogg", title: "Blogg" },
     { link: "/om_oss", title: "Om oss" },
-    { link: "/fragar_och_svar", title: "Frågor & svar" },
+    { link: "/fragor_och_svar", title: "Frågor & svar" },
   ];
 
   const isActive = (link: string) => {
@@ -28,30 +28,32 @@ const Header = (props: Props) => {
   };
 
   return (
-    <header className="flex mb-20 pt-8 items-center">
-      <div className="flex-none">
-        <Link href="/">
-          <a className="hover:underline">
-            <div
-              className="rounded-full h-20 w-20  mx-6 flex items-center justify-center"
-              style={{ backgroundColor: "#F8AF87" }}
-            ></div>
-          </a>
-        </Link>
-      </div>
-      <nav className="flex flex-grow justify-between pl-8">
-        {pages.map((page) => (
-          <Link href={page.link} key={page.link}>
-            <a
-              className={`hover:border-opacity-100 px-4 md:px-2 font-jost border-b-2 border-accent-1 uppercase font-medium text-sm ${isActive(
-                page.link
-              )}`}
-            >
-              {page.title}
+    <header className="fixed top-0 z-20 py-6 px-10 bg-background opacity-95 w-full">
+      <div className="flex items-center justify-between">
+        <div className="flex-none">
+          <Link href="/">
+            <a>
+              <div
+                className="rounded-full h-20 w-20 ml-2 md:ml-6 lg:ml-14 items-center justify-center"
+                style={{ backgroundColor: "#F8AF87" }}
+              ></div>
             </a>
           </Link>
-        ))}
-      </nav>
+        </div>
+        <nav className="flex pl-8 flex-wrap lg:flex-nowrap font-jost flex-grow justify-end space-x-4">
+          {pages.map((page) => (
+            <Link href={page.link} key={page.link}>
+              <a
+                className={`hover:border-opacity-100 border-b-2 border-accent-1 uppercase font-medium text-sm ${isActive(
+                  page.link
+                )}`}
+              >
+                {page.title}
+              </a>
+            </Link>
+          ))}
+        </nav>
+      </div>
     </header>
   );
 };

@@ -45,16 +45,17 @@ const Index = (props: Props) => {
         <Head>
           <title>Min Ekonom</title>
         </Head>
-        <Container>
-          <Header />
-        </Container>
+        <Header />
+
         <article>
           <Container>
-            <h1>Det är jättekul med pengar</h1>
+            <h1 className="max-w-screen-lg lg:mx-auto">
+              Det är jättekul med pengar
+            </h1>
             <div className="pt-20 max-w-screen-lg lg:mx-auto ">
               <ResponsivePlayer url="/assets/promo-video.mp4" controls />
             </div>
-            <p className="text-2xl font-normal whitespace-pre-line py-20 leading-snug">
+            <p className="text-2xl font-light whitespace-pre-line py-20 leading-snug max-w-screen-lg lg:mx-auto">
               {`Hur får man pengarna att räcka till nästa gång man får nya? Hur handlar man lagom? 
               Hur räknar man ut vad varor kostar egentligen?
 
@@ -128,7 +129,7 @@ const Index = (props: Props) => {
                 return (
                   <div
                     key={index}
-                    className="flex justify-center space-x-10 bg-accent-1 py-24"
+                    className="flex flex-col md:flex-row items-center space-y-6 pt-12 pb-20 md:justify-center md:space-x-10 bg-accent-1 md:py-24"
                   >
                     <Card width={300} height={300}>
                       <div className="p-5 flex flex-col items-center justify-center flex-grow">
@@ -138,12 +139,12 @@ const Index = (props: Props) => {
                         />
                       </div>
                     </Card>
-                    <Card width={440} height={230}>
-                      <div className="p-5 flex flex-col flex-grow relative">
-                        <p className="italic font-semibold text-9xl text-left">
+                    <Card width={320} height={230}>
+                      <div className="flex flex-col flex-grow relative">
+                        <p className="italic font-semibold text-9xl text-left pl-5">
                           “
                         </p>
-                        <p className="italic font-semibold text-2xl p-8 absolute top-12 text-center">
+                        <p className="italic font-semibold text-2xl absolute top-16 text-center p-3">
                           {quote.quote}
                         </p>
                       </div>
