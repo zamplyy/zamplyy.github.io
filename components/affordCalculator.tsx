@@ -57,7 +57,6 @@ const AffordCalculator = (props: Props) => {
   const [calculatedPage, setCalculatedPage] = useState<CalculatedPage>();
 
   const onSubmit = (data: FormInput) => {
-    console.table("data", data);
     const moneyLeft = data.bankAccount - data.cost;
     setMoneyLeft(moneyLeft);
     const canAfford =
