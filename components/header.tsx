@@ -28,7 +28,7 @@ const Header = (props: Props) => {
   };
 
   return (
-    <header className="fixed top-0 z-20 py-6 px-10 bg-background opacity-95 w-full">
+    <header className="fixed top-0 z-40 py-6 px-10 bg-white opacity-95 w-full">
       <div className="flex items-center justify-between">
         <div className="flex-none">
           <Link href="/">

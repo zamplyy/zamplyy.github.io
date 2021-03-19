@@ -50,7 +50,7 @@ const Index = (props: Props) => {
         <article>
           <Container>
             <h1 className="max-w-screen-lg lg:mx-auto">
-              Det är jättekul med pengar
+              Pengar behöver inte kännas svårt
             </h1>
             <div className="pt-20 max-w-screen-lg lg:mx-auto ">
               <ResponsivePlayer url="/assets/promo-video.mp4" controls />

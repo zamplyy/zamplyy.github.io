@@ -5,6 +5,7 @@ import Header from "../components/header";
 import React from "react";
 import Card from "../components/card";
 import Link from "next/link";
+import AffordCalculator from "../components/affordCalculator";
 
 const Index = () => {
   return (
@@ -22,22 +23,19 @@ const Index = () => {
             <Container>
               <div className="max-w-screen-lg lg:mx-auto">
                 <h2 className="font-bold text-3xl">
-                  Supertydlig text om hur denna funktion funkar
+                  Här får du hjälp att se om du har råd
                 </h2>
                 <p className="text-2xl py-4 font-light">
-                  SEO-optimerad är denna text också såklart. När en googlar och
-                  kommer rakt in till denna sida ska denna text på ett
-                  lättillgängligt sätt introducera användaren till hur denna
-                  funktion fungerar. Superbra!
+                  Att hålla reda på hur mycket pengar en har på kontot är inte
+                  alltid så lätt. Med Har jag råd får du bättre koll! Följ
+                  instruktionerna här nedanför så drar vi igång!
                 </p>
               </div>
             </Container>
           </section>
           <section>
             <Container>
-              <div className="flex justify-center mb-14">
-                <Card height={500} width={500}></Card>
-              </div>
+              <AffordCalculator />
             </Container>
           </section>
           <section className=" bg-accent-1">
@@ -53,8 +51,8 @@ const Index = () => {
                     <p className="italic font-semibold text-9xl text-left pl-5">
                       “
                     </p>
-                    <p className="italic font-semibold text-2xl absolute top-16 text-center p-3">
-                      Börsen säger något uppmuntrande här.
+                    <p className="italic font-semibold text-2xl absolute top-24 left-10">
+                      Det är coolt att ha koll!
                     </p>
                   </div>
                 </Card>

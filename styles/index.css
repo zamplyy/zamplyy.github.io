@@ -14,14 +14,32 @@
 
 /* Your own custom utilities */
 @layer base {
+  p {
+    @apply text-text-color;
+    @apply leading-7;
+    @apply text-2xl;
+  }
+  input {
+    @apply text-text-color;
+  }
+  label {
+    @apply text-text-color;
+  }
+  h3 {
+    @apply text-text-color;
+  }
   h1 {
     @apply text-5xl;
     @apply font-knewave;
     @apply uppercase;
     @apply tracking-widest;
+    @apply text-text-color;
   }
   h2 {
-    @apply text-xl;
+    @apply text-3xl;
+    @apply text-text-color;
+    @apply leading-normal;
+    @apply font-bold;
   }
 }
 
