@@ -6,6 +6,7 @@ import React from "react";
 import Card from "../components/card";
 import Link from "next/link";
 import AffordCalculator from "../components/affordCalculator";
+import { IconLink } from "../components/IconLink";
 
 const Index = () => {
   return (
@@ -62,30 +63,18 @@ const Index = () => {
           <section className="py-24">
             <Container>
               <div className="flex flex-col sm:flex-row justify-evenly">
-                <Link href="/jag_angrar_mig">
-                  <a href="/jag_angrar_mig">
-                    <div className="hover:underline text-accent-2 flex flex-col items-center ">
-                      <img className="py-4" src={"/assets/icons/regret.svg"} />
-                      <h3 className="font-bold uppercase py-1 tracking-wide">
-                        jag ångrar mig
-                      </h3>
-                      <p className="font-semibold py-1">Hur gör jag nu</p>
-                    </div>
-                  </a>
-                </Link>
-                <Link href="/sa_funkar_det">
-                  <a href="/sa_funkar_det">
-                    <div className="hover:underline text-accent-2 flex flex-col items-center ">
-                      <img className="py-4" src={"/assets/icons/tag.svg"} />
-                      <h3 className="font-bold uppercase py-1 tracking-wide">
-                        Hur gör man egentligen?
-                      </h3>
-                      <p className="font-semibold py-1">
-                        Kolla in Så funkar det
-                      </p>
-                    </div>
-                  </a>
-                </Link>
+                <IconLink
+                  text="Hur gör jag nu"
+                  image="/assets/icons/regret.svg"
+                  link="/jag_angrar_mig"
+                  title="jag ångrar mig"
+                />
+                <IconLink
+                  link="/sa_funkar_det"
+                  image="/assets/icons/tag.svg"
+                  title="Hur gör man egentligen?"
+                  text="Kolla in Så funkar det"
+                />
               </div>
             </Container>
           </section>

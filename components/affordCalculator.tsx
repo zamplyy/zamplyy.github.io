@@ -41,7 +41,7 @@ const calculatedPageInformation: Map<CalculatedPages, CalculatedPage> = new Map(
       {
         imageUrl: "bourse_sad.svg",
         text: "Du kan tyvärr inte köpa denna varan",
-        title: "Du tyvärr inte råd!",
+        title: "Du har tyvärr inte råd!",
         canAfford: false,
       },
     ],

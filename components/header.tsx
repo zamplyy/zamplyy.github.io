@@ -33,10 +33,7 @@ const Header = (props: Props) => {
         <div className="flex-none">
           <Link href="/">
             <a>
-              <div
-                className="rounded-full h-20 w-20 ml-2 md:ml-6 lg:ml-14 items-center justify-center"
-                style={{ backgroundColor: "#F8AF87" }}
-              ></div>
+              <img src={"/assets/logo.svg"} />
             </a>
           </Link>
         </div>

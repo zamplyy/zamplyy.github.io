@@ -32,7 +32,7 @@
     @apply text-5xl;
     @apply font-knewave;
     @apply uppercase;
-    @apply tracking-widest;
+    @apply tracking-wider;
     @apply text-text-color;
   }
   h2 {

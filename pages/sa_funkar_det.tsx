@@ -7,6 +7,7 @@ import React from "react";
 import Card from "../components/card";
 import PictureRow from "../components/picture-row";
 import Link from "next/link";
+import { IconLink } from "../components/IconLink";
 
 const Index = () => {
   return (
@@ -46,33 +47,18 @@ const Index = () => {
           <section className="py-24">
             <Container>
               <div className="flex flex-col sm:flex-row justify-evenly">
-                <Link href="/har_jag_rad">
-                  <a href="/har_jag_rad">
-                    <div className="hover:underline text-accent-2 flex flex-col items-center ">
-                      <img className="py-4" src={"/assets/icons/money.svg"} />
-                      <h3 className="font-bold uppercase py-1 tracking-wide">
-                        Har jag råd
-                      </h3>
-                      <p className="font-semibold py-1">Spana in vår guide</p>
-                    </div>
-                  </a>
-                </Link>
-                <Link href="/fragor_och_svar">
-                  <a href="/fragor_och_svar">
-                    <div className="hover:underline text-accent-2 flex flex-col items-center ">
-                      <img
-                        className="py-4"
-                        src={"/assets/icons/question.svg"}
-                      />
-                      <h3 className="font-bold uppercase py-1 tracking-wide">
-                        Frågor & svar
-                      </h3>
-                      <p className="font-semibold py-1">
-                        Det finns inga dumma frågor
-                      </p>
-                    </div>
-                  </a>
-                </Link>
+                <IconLink
+                  text="Spana in vår guide"
+                  image="/assets/icons/money.svg"
+                  link="/har_jag_rad"
+                  title="Har jag råd"
+                />
+                <IconLink
+                  text="Det finns inga dumma frågor"
+                  image="/assets/icons/question.svg"
+                  link="/fragor_och_svar"
+                  title="Frågor & svar"
+                />
               </div>
             </Container>
           </section>
