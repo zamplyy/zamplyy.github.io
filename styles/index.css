@@ -16,8 +16,8 @@
 @layer base {
   p {
     @apply text-text-color;
-    @apply leading-7;
     @apply text-2xl;
+    @apply leading-9;
   }
   input {
     @apply text-text-color;

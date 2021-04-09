@@ -4,10 +4,10 @@ import Head from "next/head";
 import Header from "../components/header";
 import ResponsivePlayer from "../components/responsivePlayer";
 import React from "react";
-import Card from "../components/card";
-import PictureRow from "../components/picture-row";
-import Link from "next/link";
 import { IconLink } from "../components/IconLink";
+import Question from "../public/assets/icons/question.svg";
+import Money from "../public/assets/icons/money.svg";
+import PictureRow from "../components/picture-row";
 
 const Index = () => {
   return (
@@ -49,13 +49,13 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row justify-evenly">
                 <IconLink
                   text="Spana in vår guide"
-                  image="/assets/icons/money.svg"
+                  icon={<Money />}
                   link="/har_jag_rad"
                   title="Har jag råd"
                 />
                 <IconLink
                   text="Det finns inga dumma frågor"
-                  image="/assets/icons/question.svg"
+                  icon={<Question />}
                   link="/fragor_och_svar"
                   title="Frågor & svar"
                 />

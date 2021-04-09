@@ -1,6 +1,11 @@
 import Card from "./card";
 import { useState } from "react";
 import { RoundButton } from "./roundButton";
+import Back from "../public/assets/icons/back.svg";
+import Close from "../public/assets/icons/close.svg";
+import Drinks from "../public/assets/icons/dryck.svg";
+import Clothes from "../public/assets/icons/klader.svg";
+import Other from "../public/assets/icons/annat.svg";
 
 type Props = {};
 
@@ -11,7 +16,7 @@ enum Page {
 }
 
 type Answer = {
-  icon?: string;
+  icon?: any;
   text: string;
 };
 
@@ -26,9 +31,9 @@ const Quiz: Question[] = [
     id: 1,
     question: "Vilken typ av produkt är det du vill lämna tillbaka?",
     answers: [
-      { text: "Mat & dryck", icon: "/assets/icons/dryck.svg" },
-      { text: "Kläder & skor", icon: "/assets/icons/klader.svg" },
-      { text: "Annat", icon: "/assets/icons/annat.svg" },
+      { text: "Mat & dryck", icon: <Drinks /> },
+      { text: "Kläder & skor", icon: <Clothes /> },
+      { text: "Annat", icon: <Other /> },
     ],
   },
   {
@@ -127,7 +132,7 @@ const RegretGuide = (props: Props) => {
       <div className="flex flex-row flex-grow py-12">
         <div className="mx-10 pt-2 flex-shrink-0">
           <button onClick={previousQuestion}>
-            <img src="/assets/icons/back.svg" />
+            <Back />
           </button>
         </div>
 
@@ -146,7 +151,7 @@ const RegretGuide = (props: Props) => {
         </div>
         <div className="mx-10 pt-2 flex-shrink-0">
           <button onClick={() => setPage(Page.start)}>
-            <img src="/assets/icons/close.svg" />
+            <Close />
           </button>
         </div>
       </div>
@@ -164,7 +169,10 @@ const RegretGuide = (props: Props) => {
           </p>
         </div>
         <div className="flex-col flex self-center">
-          <RoundButton onClick={startQuiz} text="Tack, då vet jag!" />
+          <RoundButton
+            onClick={() => setPage(Page.start)}
+            text="Tack, då vet jag!"
+          />
           <RoundButton
             onClick={startQuiz}
             text="Jag vill göra om från början"

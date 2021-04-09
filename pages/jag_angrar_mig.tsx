@@ -6,6 +6,8 @@ import RegretGuide from "../components/regretGuide";
 import Link from "next/link";
 import React from "react";
 import { IconLink } from "../components/IconLink";
+import Tag from "../public/assets/icons/tag.svg";
+import Spel from "../public/assets/icons/spel.svg";
 
 const Index = () => {
   return (
@@ -52,15 +54,15 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row justify-evenly">
                 <IconLink
                   link="/bli_kop_kompis"
-                  image="/assets/icons/tag.svg"
+                  icon={<Tag />}
                   title="Bli köpkompis"
                   text="Enkelt & smart"
                 />
                 <IconLink
-                  link="/blogg"
-                  image="/assets/icons/tag.svg"
-                  title="6 enkla spartips för alla"
-                  text="Läs Cissis blogginlägg nu"
+                  link="/spel"
+                  icon={<Spel />}
+                  title="Testa spelet"
+                  text="Vad har du råd med?"
                 />
               </div>
             </Container>

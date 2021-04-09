@@ -4,9 +4,11 @@ import Head from "next/head";
 import Header from "../components/header";
 import React from "react";
 import Card from "../components/card";
-import Link from "next/link";
 import AffordCalculator from "../components/affordCalculator";
 import { IconLink } from "../components/IconLink";
+
+import Tag from "../public/assets/icons/tag.svg";
+import Regret from "../public/assets/icons/regret.svg";
 
 const Index = () => {
   return (
@@ -65,13 +67,13 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row justify-evenly">
                 <IconLink
                   text="Hur gör jag nu"
-                  image="/assets/icons/regret.svg"
+                  icon={<Regret />}
                   link="/jag_angrar_mig"
                   title="jag ångrar mig"
                 />
                 <IconLink
                   link="/sa_funkar_det"
-                  image="/assets/icons/tag.svg"
+                  icon={<Tag />}
                   title="Hur gör man egentligen?"
                   text="Kolla in Så funkar det"
                 />
