@@ -161,12 +161,12 @@ export function ItemContainerView(props: ItemContainerProps) {
   const [{ isOver, canDrop }, drop] = useDrop(
     () => ({
       accept: ItemTypes.ITEM,
-      canDrop: (dropped) => {
+      canDrop: (dropped: any) => {
         const droppedItem: Item = dropped.item;
         if (droppedItem.id === item?.id) return false;
         return !!noDrop ? false : true;
       },
-      drop: (dropped) => {
+      drop: (dropped: any) => {
         const droppedItem: Item = dropped.item;
         console.log("Dropped item", droppedItem, item);
         if (dragHere) {
@@ -224,7 +224,7 @@ export function ItemView(props: ItemProps) {
     type: ItemTypes.ITEM,
     item: { item },
     canDrag: () => (!!noDrag ? false : true),
-    collect: (monitor) => ({
+    collect: (monitor: { isDragging: () => any; canDrag: () => any }) => ({
       isDragging: !!monitor.isDragging(),
       canDrag: !!monitor.canDrag(),
     }),
