@@ -277,7 +277,6 @@ type ItemContainerProps = {
   handleDroppedItem?: (
     from: string,
     to: string,
-    items: (Item | undefined)[],
     fromItem?: Item | undefined,
     toItem?: Item | undefined
   ) => void;
