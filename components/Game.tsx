@@ -1,7 +1,8 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "../utils/constants";
 import BourseHappy from "../public/assets/bourse_happy.svg";
+import BourseSad from "../public/assets/bourse_sad.svg";
 import { RoundButton } from "./roundButton";
 // import { motion } from "framer-motion";
 
@@ -14,13 +15,19 @@ enum Comparison {
   notEqual = "notEqual",
 }
 
+enum BourseState {
+  happy = "happy",
+  sad = "sad",
+  clueless = "clueless",
+}
+
 type Question = {
   item: Item;
   number: number;
   comparison: Comparison;
   id: number;
   question: string;
-  itemOptions: [Item?, Item?, Item?, Item?, Item?, Item?];
+  itemOptions: (Item | undefined)[];
 };
 
 type Item = {
@@ -42,7 +49,7 @@ const Items: Item[] = [
   { icon: "🍦", name: "Glass", price: 25, id: 9 },
 ];
 
-const getRandomFromArray = (arr: Item[], n: number) => {
+const getRandomFromArray = (arr: any[], n: number) => {
   var result = new Array(n),
     len = arr.length,
     taken = new Array(len);
@@ -101,6 +108,9 @@ export function Game() {
   const [question, setQuestion] = useState<Question>(Questions[0]);
   const [firstSelectedItem, setFirstSelectedItem] = useState<Item>();
   const [secondSelectedItem, setSecondSelectedItem] = useState<Item>();
+  const [bourseState, setBourseState] = useState<BourseState>(
+    BourseState.clueless
+  );
 
   const [itemOptions, setItemOptions] = useState(question.itemOptions);
   // const itemsFiltered: Item[] = useMemo(
@@ -112,34 +122,143 @@ export function Game() {
   //   [question]
   // );
 
+  const validateQuestion = () => {
+    if (firstSelectedItem && secondSelectedItem) {
+      const selectedSum = firstSelectedItem.price + secondSelectedItem.price;
+      const questionSum = question.item.price * question.number;
+
+      switch (question.comparison) {
+        case Comparison.equal:
+          return selectedSum === questionSum;
+        case Comparison.greaterThan:
+          return selectedSum > questionSum;
+        case Comparison.greaterThanEquals:
+          return selectedSum >= questionSum;
+        case Comparison.lessThan:
+          return selectedSum < questionSum;
+        case Comparison.lessThanEquals:
+          return selectedSum <= questionSum;
+        case Comparison.notEqual:
+          return selectedSum !== questionSum;
+      }
+    }
+  };
+
+  const nextQuestion = () => {
+    const random: Question[] = getRandomFromArray(Questions, 1);
+    setBourseState(BourseState.happy);
+    setFirstSelectedItem(undefined);
+    setSecondSelectedItem(undefined);
+    setQuestion(random[0]);
+    setItemOptions(random[0].itemOptions);
+  };
+
+  const handleDroppedItem = (
+    from: string,
+    to: string,
+    fromItem?: Item,
+    toItem?: Item
+  ) => {
+    if (from.includes("item_option") && to.includes("item_option")) {
+      const indexOfFromItem = parseInt(from.split("_")[2]);
+      const indexOfToItem = parseInt(to.split("_")[2]);
+      const results = itemOptions.slice();
+      const firstItem = itemOptions[indexOfFromItem];
+      results[indexOfFromItem] = itemOptions[indexOfToItem];
+      results[indexOfToItem] = firstItem;
+      setItemOptions(results);
+    } else if (from.includes("item_option") && !to.includes("item_option")) {
+      const indexOfFromItem = parseInt(from.split("_")[2]);
+      if (to === "first_selected") {
+        setFirstSelectedItem(itemOptions[indexOfFromItem]);
+      } else {
+        setSecondSelectedItem(itemOptions[indexOfFromItem]);
+      }
+      const results = itemOptions.slice();
+      results[indexOfFromItem] = toItem;
+      setItemOptions(results);
+    } else if (!from.includes("item_option") && to.includes("item_option")) {
+      const indexOfToItem = parseInt(to.split("_")[2]);
+      const results = itemOptions.slice();
+      results[indexOfToItem] = fromItem;
+      setItemOptions(results);
+      if (from === "first_selected") {
+        setFirstSelectedItem(itemOptions[indexOfToItem]);
+      } else {
+        setSecondSelectedItem(itemOptions[indexOfToItem]);
+      }
+    } else {
+      if (from === "first_selected") {
+        setFirstSelectedItem(toItem);
+        setSecondSelectedItem(fromItem);
+      } else {
+        setSecondSelectedItem(toItem);
+        setFirstSelectedItem(fromItem);
+      }
+    }
+  };
+
+  const buyDisabled = !firstSelectedItem || !secondSelectedItem;
+
+  const Bourse = () => {
+    switch (bourseState) {
+      case BourseState.happy:
+        return <BourseHappy />;
+      case BourseState.sad:
+        return <BourseSad />;
+      case BourseState.clueless:
+        return <BourseSad />;
+    }
+  };
+
   return (
     <div className="py-10 max-w-screen-lg lg:mx-auto">
       <div className="grid grid-cols-6 gap-4 gap-y-16 text-center mt-12">
-        <ItemContainerView item={question.item} showPrice noDrag noDrop />
+        <ItemContainerView
+          item={question.item}
+          showPrice
+          noDrag
+          noDrop
+          id="question_item"
+        />
         <div className="col-span-2 flex justify-center relative">
           <div className="p-4 bg-white absolute rounded-xl -top-24 left-4 -right-20">
             <p className="text-base">{question.question}</p>
           </div>
-          <div className="flex">
-            <BourseHappy />
-          </div>
+          <div className="flex">{Bourse()}</div>
         </div>
-        <ItemContainerView item={firstSelectedItem} showPrice dragHere />
-        <ItemContainerView item={secondSelectedItem} showPrice dragHere />
+        <ItemContainerView
+          item={firstSelectedItem}
+          showPrice
+          dragHere
+          id="first_selected"
+          handleDroppedItem={handleDroppedItem}
+        />
+        <ItemContainerView
+          item={secondSelectedItem}
+          showPrice
+          dragHere
+          id="second_selected"
+          handleDroppedItem={handleDroppedItem}
+        />
         <div className="h-10">
           <RoundButton
             text="KÖP"
             onClick={() => {
-              console.log("question", question);
+              if (validateQuestion()) {
+                nextQuestion();
+              }
             }}
+            disabled={buyDisabled}
           ></RoundButton>
         </div>
         {itemOptions.map((item, i) => (
-          <div
-            key={"item_" + item?.id + "_" + i}
-            onClick={() => setFirstSelectedItem(item)}
-          >
-            <ItemContainerView item={item} />
+          <div key={"item_" + item?.id + "_" + i}>
+            <ItemContainerView
+              item={item}
+              id={`item_option_${i}`}
+              handleDroppedItem={handleDroppedItem}
+            />
           </div>
         ))}
       </div>
@@ -154,23 +273,38 @@ type ItemContainerProps = {
   noDrop?: boolean;
   dragHere?: boolean;
   setItemOptions?: any;
+  id: string;
+  handleDroppedItem?: (
+    from: string,
+    to: string,
+    items: (Item | undefined)[],
+    fromItem?: Item | undefined,
+    toItem?: Item | undefined
+  ) => void;
 };
 export function ItemContainerView(props: ItemContainerProps) {
-  const { item, showPrice, noDrag, noDrop, dragHere } = props;
+  const {
+    item,
+    showPrice,
+    noDrag,
+    noDrop,
+    dragHere,
+    id,
+    handleDroppedItem,
+  } = props;
 
   const [{ isOver, canDrop }, drop] = useDrop(
     () => ({
       accept: ItemTypes.ITEM,
-      canDrop: (dropped: any) => {
-        const droppedItem: Item = dropped.item;
+      canDrop: (hovered: any) => {
+        const droppedItem: Item = hovered.item;
         if (droppedItem.id === item?.id) return false;
         return !!noDrop ? false : true;
       },
-      drop: (dropped: any) => {
+      drop: (dropped) => {
         const droppedItem: Item = dropped.item;
-        console.log("Dropped item", droppedItem, item);
-        if (dragHere) {
-        } else {
+        if (handleDroppedItem) {
+          handleDroppedItem(id, dropped.id, item, droppedItem);
         }
       },
       collect: (monitor) => ({
@@ -178,21 +312,21 @@ export function ItemContainerView(props: ItemContainerProps) {
         canDrop: !!monitor.canDrop(),
       }),
     }),
-    []
+    [item?.id, handleDroppedItem]
   );
 
   return (
     <div>
       <div
         ref={drop}
-        className={`h-28 justify-center items-center flex border-4 rounded-xl ${
+        className={`h-28 justify-center flex border-4 rounded-xl ${
           isOver && canDrop
             ? "bg-accent-2  border-accent-3"
             : "bg-accent-3  border-accent-2"
         }`}
       >
         {item ? (
-          <ItemView item={item} noDrag={noDrag} />
+          <ItemView item={item} noDrag={noDrag} id={id} />
         ) : dragHere ? (
           <p
             className={`opacity-60 text-center ${
@@ -215,24 +349,30 @@ export function ItemContainerView(props: ItemContainerProps) {
 type ItemProps = {
   item: Item;
   noDrag?: boolean;
+  id: string;
 };
 
 export function ItemView(props: ItemProps) {
-  const { item, noDrag } = props;
+  const { item, noDrag, id } = props;
 
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: ItemTypes.ITEM,
-    item: { item },
-    canDrag: () => (!!noDrag ? false : true),
-    collect: (monitor: { isDragging: () => any; canDrag: () => any }) => ({
-      isDragging: !!monitor.isDragging(),
-      canDrag: !!monitor.canDrag(),
+  const [{ isDragging }, drag] = useDrag(
+    () => ({
+      type: ItemTypes.ITEM,
+      item: { item, id },
+      canDrag: () => (!!noDrag ? false : true),
+      collect: (monitor) => ({
+        isDragging: !!monitor.isDragging(),
+        canDrag: !!monitor.canDrag(),
+      }),
     }),
-  }));
+    [item?.id]
+  );
 
   return (
     <div
-      className={`flex-col justify-center ${isDragging ? "hidden" : "flex"}`}
+      className={`justify-center items-center flex-grow  ${
+        isDragging ? "hidden" : "flex"
+      }`}
       ref={drag}
     >
       <p className="text-5xl">{item.icon}</p>
