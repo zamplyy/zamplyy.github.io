@@ -1,8 +1,8 @@
 ---
-title: "Two Forms of Pre-rendering"
-date: "2020-01-01"
+title: "Så blir du mer självständig med hjälp av börsen"
+date: "2021-02-09"
 author: "Joar Karlsson"
-image: "money0.jpg"
+category: "spartips"
 ---
 
 ## Tumidam ignarus

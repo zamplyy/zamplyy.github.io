@@ -1,8 +1,8 @@
 ---
-title: "When to Use Static Generation v.s. Server-side Rendering"
-date: "2020-01-02"
-author: "Joar Karlsson"
-image: "money1.jpg"
+title: "Det roligaste jag nånsin lyckats returnera i en butik"
+date: "2021-01-12"
+author: "Tomas Green"
+category: "retur"
 ---
 
 ## Per venerit animam multos singultibus labore ridet

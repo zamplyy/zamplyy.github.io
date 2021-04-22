@@ -4,11 +4,22 @@ import matter from "gray-matter";
 import remark from "remark";
 import html from "remark-html";
 
+// const readingTime = require('reading-time');
+
+import readingTime from "reading-time";
+
+export type Category = {
+  name: string;
+  color: string;
+};
+
 type Post = {
-  date: string;
+  date: number;
   title: string;
   author: string;
   image: string;
+  category: string;
+  readingTime: string;
 };
 
 type PostWithId = Post & {
@@ -33,9 +44,15 @@ export function getSortedPostsData(): PostsWithId {
 
     const matterResult = matter(fileContents);
 
+    const minutesRead = `${Math.round(
+      readingTime(matterResult.content).minutes
+    )} min läsning`;
+
     return {
       id,
       ...(matterResult.data as Post),
+      date: Date.parse(matterResult.data.date),
+      readingTime: minutesRead,
     };
   });
   return allPostsData.sort((a, b) => {
@@ -56,6 +73,18 @@ export function getAllPostIds() {
       },
     };
   });
+}
+
+export function getAllUniquePostCategories(posts: PostsWithId): Category[] {
+  const availableColors = ["#33787B", "#EACE97", "#F8AF87", "#C2E4D8"];
+
+  const uniqueCategories = posts
+    .map((post) => post.category)
+    .filter((value, index, self) => self.indexOf(value) === index)
+    .map((post, i) => {
+      return { name: post, color: availableColors[i] || "#C2E4D8" };
+    });
+  return uniqueCategories;
 }
 
 export async function getPostData(id: string): Promise<PostWithContent> {
