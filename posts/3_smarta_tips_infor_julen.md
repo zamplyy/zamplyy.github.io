@@ -1,7 +1,7 @@
 ---
 title: "3 smarta tips inför julen"
 date: "2020-12-11"
-author: "Emelie Gustafsson"
+author: "Vega Andersson"
 category: "spargris"
 ---
 
