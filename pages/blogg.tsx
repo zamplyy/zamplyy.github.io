@@ -35,10 +35,7 @@ const Blogg = (props: Props) => {
   };
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterTags, setFilterTags] = useState<string[]>([
-    "spargris",
-    "spartips",
-  ]);
+  const [filterTags, setFilterTags] = useState<string[]>([]);
   const [searchResults, setSearchResults] = useState<PostsWithId>([]);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
