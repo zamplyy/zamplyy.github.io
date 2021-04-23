@@ -17,6 +17,7 @@ import { IconLink } from "../components/IconLink";
 import UserIcon from "../public/assets/icons/user.svg";
 import Tag from "../public/assets/icons/tag.svg";
 import Question from "../public/assets/icons/question.svg";
+import Close from "../public/assets/icons/close-white.svg";
 
 type Props = {
   allPostsData: PostsWithId;
@@ -34,6 +35,10 @@ const Blogg = (props: Props) => {
   };
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [filterTags, setFilterTags] = useState<string[]>([
+    "spargris",
+    "spartips",
+  ]);
   const [searchResults, setSearchResults] = useState<PostsWithId>([]);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
@@ -47,8 +52,27 @@ const Blogg = (props: Props) => {
         category.toLowerCase().includes(search)
       );
     });
-    setSearchResults(results);
-  }, [searchTerm]);
+    if (filterTags.length > 0) {
+      const filtered = results.filter(
+        (results) => !!filterTags.find((filter) => filter === results.category)
+      );
+      setSearchResults(filtered);
+    } else {
+      setSearchResults(results);
+    }
+  }, [searchTerm, filterTags]);
+
+  const removeTag = (tag: string) => {
+    const filtered = filterTags.filter((aTag) => aTag !== tag);
+    setFilterTags(filtered);
+  };
+
+  const addTag = (tag: string) => {
+    if (!!filterTags.find((aTag) => aTag === tag)) return;
+    const tags = [...filterTags];
+    tags.push(tag);
+    setFilterTags(tags);
+  };
 
   return (
     <>
@@ -65,14 +89,33 @@ const Blogg = (props: Props) => {
           </section>
           <section>
             <Container>
-              <div className="py-14 flex w-1/2">
-                <input
-                  type="text"
-                  placeholder="Sök"
-                  value={searchTerm}
-                  onChange={handleChange}
-                  className="bg-white border-4 border-gray-400 rounded-full px-5 py-4  flex-grow"
-                />
+              <div className="py-14">
+                <div className="flex w-1/2">
+                  <input
+                    type="text"
+                    placeholder="Sök"
+                    value={searchTerm}
+                    onChange={handleChange}
+                    className="bg-white border-4 border-gray-400 rounded-full px-5 py-4  flex-grow"
+                  />
+                </div>
+                <div className="flex pt-5 w-1/2 flex-wrap">
+                  {filterTags.map((tag) => (
+                    <div
+                      key={tag}
+                      className="px-2 py-1 mx-2 my-1 rounded-full bg-accent-2 flex items-center"
+                    >
+                      <p className="text-base text-white font-bold">{tag}</p>
+                      <motion.div
+                        className="px-1"
+                        onClick={() => removeTag(tag)}
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <Close />
+                      </motion.div>
+                    </div>
+                  ))}
+                </div>
               </div>
               <div className="grid grid-cols-4 gap-8">
                 <div className="col-span-4 md:col-span-3">
@@ -129,7 +172,7 @@ const Blogg = (props: Props) => {
                     >
                       <p
                         className="font-semibold py-1 text-base  hover:underline cursor-pointer"
-                        onClick={() => setSearchTerm(name)}
+                        onClick={() => addTag(name)}
                       >
                         {`#${name}`}
                       </p>
