@@ -9,10 +9,14 @@ module.exports = {
         "accent-2": "#33787B",
         "accent-3": "#E0EBEB",
         "text-color": "#343434",
+        "grey-background": "#EDEDED",
         background: "#E5E5E5",
         border: "#C4C4C4",
         good: "#C2E4D8",
         bad: "#F2C8C2",
+      },
+      borderRadius: {
+        "4xl": "40px",
       },
     },
     fontFamily: {

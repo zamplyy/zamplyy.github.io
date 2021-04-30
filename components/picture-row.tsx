@@ -15,7 +15,7 @@ const PictureRow = ({ imageUrl, text, title, imageIsLeft }: Props) => {
         imageIsLeft ? "sm:flex-row-reverse" : "sm:flex-row"
       } `}
     >
-      <div className="flex-1 max-w-xl">
+      <div className="flex-1 max-w-xl mr-4 mb-4 sm:mb-0">
         <h2 className="font-bold text-3xl">{title}</h2>
         <p className="text-2xl font-light">{text}</p>
       </div>

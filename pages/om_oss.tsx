@@ -68,6 +68,32 @@ const Index = () => {
           <section>
             <Quotes quotes={quotes} />
           </section>
+          <section className="py-40 flex flex-col items-center">
+            <h2 className="">Ett samarbete mellan</h2>
+            <div className="flex items-center mx-8 flex-col sm:flex-row">
+              <a
+                className="pr-6 py-6"
+                href="https://www.pts.se/"
+                target="_blank"
+              >
+                <img src={"/assets/pts-black.png"} />
+              </a>
+              <a
+                className="py-6 sm:-mb-10 md:-mb-14 px-6"
+                href="https://www.tietoevry.com/"
+                target="_blank"
+              >
+                <img src={"/assets/tietoevry-black.png"} />
+              </a>
+              <a
+                className="pl-6 mb-1 py-6"
+                href="https://www.lansstyrelsen.se/orebro.html"
+                target="_blank"
+              >
+                <img src={"/assets/lansstyrelsen-big.png"} />
+              </a>
+            </div>
+          </section>
         </article>
       </Layout>
     </>

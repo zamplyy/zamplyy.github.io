@@ -6,7 +6,7 @@ import RegretGuide from "../components/regretGuide";
 import Link from "next/link";
 import React from "react";
 import { IconLink } from "../components/IconLink";
-import Tag from "../public/assets/icons/tag.svg";
+import Friend from "../public/assets/icons/friend.svg";
 import Spel from "../public/assets/icons/spel.svg";
 
 const Index = () => {
@@ -54,7 +54,7 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row justify-evenly">
                 <IconLink
                   link="/bli_kop_kompis"
-                  icon={<Tag />}
+                  icon={<Friend />}
                   title="Bli köpkompis"
                   text="Enkelt & smart"
                 />

@@ -9,6 +9,7 @@ const Header = (props: Props) => {
   const router = useRouter();
 
   const pages = [
+    { link: "/", title: "Hem" },
     { link: "/sa_funkar_det", title: "Så funkar det" },
     { link: "/har_jag_rad", title: "Har jag råd" },
     { link: "/jag_angrar_mig", title: "Jag ångrar mig" },
@@ -41,7 +42,7 @@ const Header = (props: Props) => {
           {pages.map((page) => (
             <Link href={page.link} key={page.link}>
               <a
-                className={`hover:border-opacity-100 border-b-2 border-accent-1 uppercase font-medium text-sm ${isActive(
+                className={`hover:border-opacity-100 border-b-4 border-accent-2 uppercase font-medium text-sm ${isActive(
                   page.link
                 )}`}
               >

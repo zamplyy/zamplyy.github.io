@@ -34,6 +34,7 @@
     @apply uppercase;
     @apply tracking-wider;
     @apply text-text-color;
+    @apply leading-tight;
   }
   h2 {
     @apply text-3xl;

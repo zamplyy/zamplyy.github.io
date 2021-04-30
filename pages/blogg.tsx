@@ -17,12 +17,14 @@ import { IconLink } from "../components/IconLink";
 import UserIcon from "../public/assets/icons/user.svg";
 import Tag from "../public/assets/icons/tag.svg";
 import Question from "../public/assets/icons/question.svg";
-import Close from "../public/assets/icons/close-white.svg";
+import Close from "../public/assets/icons/close-small.svg";
 
 type Props = {
   allPostsData: PostsWithId;
   uniquePostCategories: Category[];
 };
+
+const MAX_NUMBER_OF_POSTS_PER_PAGE = 10;
 
 const Blogg = (props: Props) => {
   const { allPostsData, uniquePostCategories } = props;
@@ -53,9 +55,11 @@ const Blogg = (props: Props) => {
       const filtered = results.filter(
         (results) => !!filterTags.find((filter) => filter === results.category)
       );
-      setSearchResults(filtered);
+      const capped = filtered.slice(0, MAX_NUMBER_OF_POSTS_PER_PAGE);
+      setSearchResults(capped);
     } else {
-      setSearchResults(results);
+      const capped = results.slice(0, MAX_NUMBER_OF_POSTS_PER_PAGE);
+      setSearchResults(capped);
     }
   }, [searchTerm, filterTags]);
 
@@ -93,20 +97,20 @@ const Blogg = (props: Props) => {
                     placeholder="Sök"
                     value={searchTerm}
                     onChange={handleChange}
-                    className="bg-white border-4 border-gray-400 rounded-full px-5 py-4  flex-grow"
+                    className="bg-white border-4 border-gray-400 rounded-full px-5 py-4 flex-grow text-lg"
                   />
                 </div>
                 <div className="flex pt-5 w-1/2 flex-wrap">
                   {filterTags.map((tag) => (
                     <div
                       key={tag}
-                      className="px-2 py-1 mx-2 my-1 rounded-full bg-accent-2 flex items-center"
+                      className="pl-4 py-1 mx-2 my-1 bg-grey-background flex items-center"
                     >
-                      <p className="text-base text-white font-bold">{tag}</p>
+                      <p className="text-lg pr-4">{tag}</p>
                       <motion.div
-                        className="px-1"
+                        className="px-4"
                         onClick={() => removeTag(tag)}
-                        whileHover={{ scale: 1.1 }}
+                        whileHover={{ scale: 1.3 }}
                       >
                         <Close />
                       </motion.div>

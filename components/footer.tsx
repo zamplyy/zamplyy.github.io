@@ -9,8 +9,8 @@ const Footer = () => {
   return (
     <footer className="bg-accent-2">
       <Container>
-        <div className="py-14 lg:px-14 flex justify-around sm:justify-start sm:space-x-12">
-          <div>
+        <div className="py-14 lg:px-14 flex justify-around flex-wrap ">
+          <div className="px-7">
             <h3 className="text-sm font-medium text-white py-3 sm:text-base">
               Ladda ner appen
             </h3>
@@ -23,8 +23,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-
-          <div>
+          <div className="px-7">
             <h3 className="text-sm font-medium text-white py-3 sm:text-base">
               Kontakt
             </h3>
@@ -39,6 +38,25 @@ const Footer = () => {
                 <Facebook />
               </a>
             </div>
+          </div>
+          <div className="flex justify-center flex-grow items-end md:justify-end pt-5 ">
+            <a className="pr-4" href="https://www.pts.se/" target="_blank">
+              <img src={"/assets/pts-white.png"} />
+            </a>
+            <a
+              className="-mb-3 px-4"
+              href="https://www.tietoevry.com/"
+              target="_blank"
+            >
+              <img src={"/assets/tietoevry-white.png"} />
+            </a>
+            <a
+              className="pl-4"
+              href="https://www.lansstyrelsen.se/orebro.html"
+              target="_blank"
+            >
+              <img src={"/assets/lansstyrelsen.png"} />
+            </a>
           </div>
         </div>
       </Container>

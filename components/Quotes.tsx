@@ -83,7 +83,7 @@ export function Quotes(props: Props) {
         return (
           <div
             key={index}
-            className="flex flex-col md:flex-row items-center space-y-6 pt-12 pb-20 md:justify-center md:space-x-10 bg-accent-1 md:py-24"
+            className="flex flex-col md:flex-row items-center space-y-6 pt-12 pb-20 md:justify-center md:space-x-10 bg-accent-1 md:pt-24 md:pb-28"
           >
             <Card width={300} height={300}>
               <div className="p-5 flex flex-col items-center justify-center flex-grow">
