@@ -1,6 +1,8 @@
 import Card from "./card";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+// import starUrl, { ReactComponent as Star } from './star.svg'
+// import ThumbsUpUrl from "../public/assets/icons/thumbs-up.svg";
 
 type Props = {};
 interface FormInput {
@@ -20,7 +22,7 @@ enum CalculatedPages {
 
 interface CalculatedPage {
   title: string;
-  imageUrl: string;
+  icon: any;
   text: string;
   canAfford: boolean;
 }
@@ -30,7 +32,7 @@ const calculatedPageInformation: Map<CalculatedPages, CalculatedPage> = new Map(
     [
       CalculatedPages.canAfford,
       {
-        imageUrl: "bourse_happy.svg",
+        icon: "/assets/icons/thumbs-up.svg",
         text: "Om du köper varan har du såhär mycket kvar på kontot:",
         title: "Du har råd!",
         canAfford: true,
@@ -39,7 +41,7 @@ const calculatedPageInformation: Map<CalculatedPages, CalculatedPage> = new Map(
     [
       CalculatedPages.canNotAfford,
       {
-        imageUrl: "bourse_sad.svg",
+        icon: "/assets/icons/thumbs-down.svg",
         text: "Du kan tyvärr inte köpa denna varan",
         title: "Du har tyvärr inte råd!",
         canAfford: false,
@@ -60,7 +62,7 @@ const AffordCalculator = (props: Props) => {
     const moneyLeft = data.bankAccount - data.cost;
     setMoneyLeft(moneyLeft);
     const canAfford =
-      moneyLeft > 0 ? CalculatedPages.canAfford : CalculatedPages.canNotAfford;
+      moneyLeft >= 0 ? CalculatedPages.canAfford : CalculatedPages.canNotAfford;
     setCalculatedPage(calculatedPageInformation.get(canAfford));
     setPage(Page.calculated);
   };
@@ -134,11 +136,9 @@ const AffordCalculator = (props: Props) => {
         }`}
       >
         <div className="justify-center flex flex-col">
-          <img
-            src={`/assets/${calculatedPage?.imageUrl}`}
-            width="30%"
-            className="m-auto"
-          />
+          <div className="m-auto w-32">
+            <img src={calculatedPage?.icon}></img>
+          </div>
           <div className="text-center space-y-3 py-5">
             <h3 className="font-bold text-2xl">{calculatedPage?.title}</h3>
             <p>{calculatedPage?.text}</p>

@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import { Answer } from "../pages/fragor_och_svar";
+import Chevron from "../public/assets/icons/chevron.svg";
 
 type AccordionProps = {
   options: Answer[];
@@ -20,10 +21,15 @@ const AccordionItem = ({
   index,
 }: AccordionItemProps) => {
   return (
-    <motion.li className="rounded-full bg-white py-2 px-4 my-3 cursor-pointer">
-      <button onClick={() => handleClick(index)}>
-        <p>{option.title}</p>
-      </button>
+    <motion.li className="rounded-3xl bg-white py-2 px-4 my-3 cursor-pointer">
+      <div className="flex justify-between" onClick={() => handleClick(index)}>
+        <button>
+          <p>{option.title}</p>
+        </button>
+        <motion.button animate={{ rotate: isActive ? 180 : 0 }}>
+          <Chevron />
+        </motion.button>
+      </div>
       <AnimatePresence>
         {isActive && (
           <motion.p

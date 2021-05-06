@@ -1,9 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "../utils/constants";
 import BourseHappy from "../public/assets/bourse_happy.svg";
 import BourseSad from "../public/assets/bourse_sad.svg";
+import BourseClueless from "../public/assets/bourse_clueless.svg";
 import { RoundButton } from "./roundButton";
+import { AnimatePresence, motion } from "framer-motion";
 // import { motion } from "framer-motion";
 
 enum Comparison {
@@ -66,30 +68,60 @@ const getRandomFromArray = (arr: any[], n: number) => {
 const Questions: Question[] = [
   {
     comparison: Comparison.equal,
-    question: "Hjälp mig köpa 2 varor som kostar lika mycket som chokladen!",
+    question: "Hjälp mig köpa 2 varor som kostar lika mycket som glassen!",
     id: 1,
     item: { icon: "🍦", name: "Glass", price: 25, id: 9 },
     number: 1,
     itemOptions: [
-      { icon: "🍫", name: "Choklad", price: 20, id: 3 },
-      { icon: "🧀", name: "Ost", price: 5, id: 4 },
-      { icon: "🍔", name: "Hamburgare", price: 10, id: 5 },
-      { icon: "🍟", name: "Pommes", price: 8, id: 6 },
       { icon: "🍾", name: "Champagne", price: 100, id: 7 },
+      { icon: "🍫", name: "Choklad", price: 20, id: 3 },
+      { icon: "🍟", name: "Pommes", price: 8, id: 6 },
+      { icon: "🍔", name: "Hamburgare", price: 10, id: 5 },
       { icon: "🍕", name: "Pizza", price: 17, id: 8 },
+      { icon: "🧀", name: "Ost", price: 5, id: 4 },
     ],
   },
   {
     comparison: Comparison.lessThan,
-    question: "Hjälp mig köpa 2 varor som kostar mindre än som champagnen!",
+    question: "Hjälp mig köpa 2 varor som kostar mindre än champagnen!",
     id: 1,
-    item: { icon: "🍾", name: "Champagne", price: 100, id: 7 },
+    item: { icon: "🍾", name: "Champagne", price: 50, id: 7 },
     number: 1,
     itemOptions: [
+      { icon: "🍟", name: "Pommes", price: 28, id: 6 },
       { icon: "🍫", name: "Choklad", price: 20, id: 3 },
-      { icon: "🧀", name: "Ost", price: 5, id: 4 },
-      { icon: "🍔", name: "Hamburgare", price: 10, id: 5 },
-      { icon: "🍟", name: "Pommes", price: 8, id: 6 },
+      { icon: "🍕", name: "Pizza", price: 17, id: 8 },
+      { icon: "🍐", name: "Päron", price: 6, id: 2 },
+      { icon: "🧀", name: "Ost", price: 35, id: 4 },
+      { icon: "🍔", name: "Hamburgare", price: 13, id: 5 },
+    ],
+  },
+  {
+    comparison: Comparison.lessThan,
+    question: "Hjälp mig köpa 2 varor som kostar mindre än fotbollen!",
+    id: 1,
+    item: { icon: "⚽️", name: "Fotboll", price: 250, id: 7 },
+    number: 1,
+    itemOptions: [
+      { icon: "🪀", name: "Yoyo", price: 69, id: 3 },
+      { icon: "🏓", name: "Pingisrack", price: 199, id: 4 },
+      { icon: "🍭", name: "'Klubba'", price: 13, id: 5 },
+      { icon: "🏸", name: "BadmintonRack", price: 149, id: 6 },
+      { icon: "🏂", name: "Snowboard", price: 1599, id: 2 },
+      { icon: "🚴‍♂️", name: "Cykel", price: 2300, id: 8 },
+    ],
+  },
+  {
+    comparison: Comparison.greaterThanEquals,
+    question: "Hjälp mig köpa 2 varor som kostar mer än som hamburgaremenyn!",
+    id: 1,
+    item: { icon: "🍔🍟🥤", name: "HamburgareMeny", price: 95, id: 7 },
+    number: 1,
+    itemOptions: [
+      { icon: "🍣", name: "Sushi", price: 80, id: 3 },
+      { icon: "🧀", name: "Ost", price: 35, id: 4 },
+      { icon: "🍭", name: "'Klubba'", price: 13, id: 5 },
+      { icon: "🍿", name: "Popcorn", price: 48, id: 6 },
       { icon: "🍐", name: "Päron", price: 6, id: 2 },
       { icon: "🍕", name: "Pizza", price: 17, id: 8 },
     ],
@@ -105,7 +137,9 @@ const Questions: Question[] = [
 // }
 
 export function Game() {
-  const [question, setQuestion] = useState<Question>(Questions[0]);
+  const [question, setQuestion] = useState<Question>(
+    Questions[Math.floor(Math.random() * Questions.length)]
+  );
   const [firstSelectedItem, setFirstSelectedItem] = useState<Item>();
   const [secondSelectedItem, setSecondSelectedItem] = useState<Item>();
   const [bourseState, setBourseState] = useState<BourseState>(
@@ -146,7 +180,7 @@ export function Game() {
 
   const nextQuestion = () => {
     const random: Question[] = getRandomFromArray(Questions, 1);
-    setBourseState(BourseState.happy);
+    setBourseState(BourseState.clueless);
     setFirstSelectedItem(undefined);
     setSecondSelectedItem(undefined);
     setQuestion(random[0]);
@@ -207,12 +241,23 @@ export function Game() {
       case BourseState.sad:
         return <BourseSad />;
       case BourseState.clueless:
-        return <BourseSad />;
+        return <BourseClueless />;
+    }
+  };
+
+  const BourseTalking = () => {
+    switch (bourseState) {
+      case BourseState.happy:
+        return "Tack för hjälpen !!";
+      case BourseState.sad:
+        return "OJ nu blev det lite knasigt. Försök igen!";
+      case BourseState.clueless:
+        return question.question;
     }
   };
 
   return (
-    <div className="py-10 max-w-screen-lg lg:mx-auto">
+    <motion.div className="py-10 max-w-screen-lg lg:mx-auto">
       <div className="grid grid-cols-6 gap-4 gap-y-16 text-center mt-12">
         <ItemContainerView
           item={question.item}
@@ -223,7 +268,7 @@ export function Game() {
         />
         <div className="col-span-2 flex justify-center relative">
           <div className="p-4 bg-white absolute rounded-xl -top-24 left-4 -right-20">
-            <p className="text-base">{question.question}</p>
+            <p className="text-base">{BourseTalking()}</p>
           </div>
           <div className="flex">{Bourse()}</div>
         </div>
@@ -243,10 +288,16 @@ export function Game() {
         />
         <div className="h-10">
           <RoundButton
-            text="KÖP"
+            text={bourseState !== BourseState.happy ? "KÖP" : "NÄSTA"}
             onClick={() => {
-              if (validateQuestion()) {
+              if (bourseState === BourseState.happy) {
                 nextQuestion();
+              } else {
+                if (validateQuestion()) {
+                  setBourseState(BourseState.happy);
+                } else {
+                  setBourseState(BourseState.sad);
+                }
               }
             }}
             disabled={buyDisabled}
@@ -262,7 +313,7 @@ export function Game() {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -328,7 +379,7 @@ export function ItemContainerView(props: ItemContainerProps) {
           <ItemView item={item} noDrag={noDrag} id={id} />
         ) : dragHere ? (
           <p
-            className={`opacity-60 text-center ${
+            className={`opacity-60 text-center self-center ${
               isOver && canDrop ? "text-white" : "text-black"
             }`}
           >

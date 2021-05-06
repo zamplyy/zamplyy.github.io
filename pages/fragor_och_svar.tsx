@@ -5,7 +5,7 @@ import Header from "../components/header";
 import Select from "react-select";
 import { RoundButton } from "../components/roundButton";
 import Search from "../public/assets/icons/search2.svg";
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import { IconLink } from "../components/IconLink";
 import Friend from "../public/assets/icons/friend.svg";
 import Tag from "../public/assets/icons/tag.svg";
@@ -52,35 +52,104 @@ const answers: Answer[] = [
   {
     title: "Skillnad på vad jag behöver och vill ha?",
     category: Category.har_jag_rad,
-    answer: "lorem",
+    answer: `Praesent mollis, neque in tempus varius, felis arcu elementum orci, sed tincidunt urna orci a dolor. Cras elementum nulla vel nisl efficitur cursus. Sed ut velit eu enim vestibulum mollis eu sed augue. Fusce nec sapien in eros laoreet aliquam id id dolor. Maecenas malesuada magna sit amet sollicitudin volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+    Nulla quis mauris et magna aliquam pharetra. Vivamus sit amet iaculis augue, et congue neque. Ut sodales massa vitae quam molestie, sit amet ultrices tellus rutrum. Aliquam aliquet aliquam porttitor. Aliquam erat volutpat. Ut fringilla velit sed quam accumsan accumsan. Nullam non ullamcorper ipsum. Nam malesuada orci quis urna ultricies, suscipit scelerisque sapien elementum. Pellentesque scelerisque dolor vitae felis tristique, vitae consectetur sapien dignissim. Pellentesque a purus condimentum, hendrerit tortor pulvinar, semper ipsum. Morbi iaculis, nibh ac efficitur blandit, nisi lorem laoreet massa, eu rhoncus erat massa ac nibh. Interdum et malesuada fames ac ante ipsum primis in faucibus.`,
   },
   {
     title: "Vad kan jag göra för att spara pengar?",
     category: Category.har_jag_rad,
-    answer: "lorem",
+    answer: `ullam molestie, odio id rhoncus placerat, nisl ipsum finibus metus, vel fermentum ligula magna faucibus eros. Curabitur volutpat, mi mattis tincidunt pulvinar, lorem nunc tristique ex, consequat lobortis mauris ante vitae lectus. Pellentesque arcu purus, iaculis vitae molestie eu, bibendum ac mi.
+
+    Pellentesque viverra nunc nisi, pellentesque cursus lorem fringilla sit amet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur congue, elit a molestie pellentesque, orci risus vulputate ante, iaculis condimentum lorem sapien iaculis dui. Aliquam erat volutpat. Vivamus non neque eget tortor sodales elementum. Praesent neque eros, dignissim eu erat eget, cursus scelerisque elit. `,
   },
   {
     title: "Hur handlar man “lagom”?",
     category: Category.har_jag_rad,
-    answer: "lorem",
+    answer: `am erat volutpat. Vivamus non neque eget tortor sodales elementum. Praesent neque eros, dignissim eu erat eget, cursus scelerisque elit. Vivamus at urna sed mauris accumsan rutrum placerat sit amet sem. Phasellus congue lorem ut faucibus porta. Nunc ac lacinia tellus, ac consectetur odio. Aliquam tincidunt augue sapien, nec porttitor augue volutpat sit amet. Nunc malesuada lacus tortor, at volutpat lacus tincidunt at. Aenean imperdiet massa sit amet libero consequat lobortis ac in mauris. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi scelerisque nulla ut nisl condimentum tempor.
+
+    Mauris quis turpis ut risus vehicula sollicitudin. Pellentesque scelerisque est ipsum, vitae vehicula nisi venenatis in. Morbi eu felis cursus, imperdiet dui a, fringilla lorem.`,
   },
   {
     title: "Hur gör jag en budget?",
     category: Category.har_jag_rad,
-    answer: "lorem",
+    answer: `Mauris porttitor velit tellus, quis aliquet ex blandit eget. In augue odio, blandit quis dui sed, posuere elementum dui. Nam aliquet urna eu lectus tincidunt, ac pretium justo condimentum. In hac habitasse platea dictumst.
+
+    Proin tortor nibh, feugiat consectetur maximus a, facilisis ut risus. Aliquam porta elementum nulla, quis cursus urna venenatis sit amet. Nulla facilisi. Donec enim velit, elementum vel gravida vitae, dignissim sit amet lectus. Cras viverra orci vitae imperdiet viverra. Nullam leo eros, finibus interdum tortor a, accumsan faucibus felis. Vivamus in augue tellus. Donec eget erat in diam pulvinar porttitor. Quisque eu gravida lectus.`,
   },
   {
     title: "Varför kan en budget vara bra att ha?",
     category: Category.har_jag_rad,
-    answer: "lorem",
+    answer: `Phasellus egestas ante id orci consectetur tempor. Duis purus nulla, pharetra tristique felis sit amet, luctus molestie odio. Vestibulum non elit erat. Integer ipsum nibh, elementum nec dolor sit amet, ultricies dictum mauris. Fusce vitae imperdiet lectus. Praesent mollis, neque in tempus varius, felis arcu elementum orci, sed tincidunt urna orci a dolor. Cras elementum nulla vel nisl efficitur cursus. Sed ut velit eu enim vestibulum mollis eu sed augue. Fusce nec sapien in eros laoreet aliquam id id dolor. Maecenas malesuada magna sit amet sollicitudin volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+
+    Nulla quis mauris et magna aliquam pharetra. Vivamus sit amet iaculis augue, et congue neque. Ut sodales massa vitae quam molestie, sit amet ultrices tellus rutrum.`,
+  },
+  {
+    title: "Hur blir man köpkompis?",
+    category: Category.bli_kop_kompis,
+    answer: `Phasellus egestas ante id orci consectetur tempor. Duis purus nulla, pharetra tristique felis sit amet, luctus molestie odio. Vestibulum non elit erat. Integer ipsum nibh, elementum nec dolor sit amet, ultricies dictum mauris. Fusce vitae imperdiet lectus. Praesent mollis, neque in tempus varius, felis arcu elementum orci, sed tincidunt urna orci a dolor. Cras elementum nulla vel nisl efficitur cursus. Sed ut velit eu enim vestibulum mollis eu sed augue. Fusce nec sapien in eros laoreet aliquam id id dolor. Maecenas malesuada magna sit amet sollicitudin volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+
+    Nulla quis mauris et magna aliquam pharetra. Vivamus sit amet iaculis augue, et congue neque. Ut sodales massa vitae quam molestie, sit amet ultrices tellus rutrum.`,
+  },
+  {
+    title: "Vad är skillnaden på att vara köpkompis och god man?",
+    category: Category.bli_kop_kompis,
+    answer: `Phasellus egestas ante id orci consectetur tempor. Duis purus nulla, pharetra tristique felis sit amet, luctus molestie odio. Vestibulum non elit erat. Integer ipsum nibh, elementum nec dolor sit amet, ultricies dictum mauris. Fusce vitae imperdiet lectus. Praesent mollis, neque in tempus varius, felis arcu elementum orci, sed tincidunt urna orci a dolor. Cras elementum nulla vel nisl efficitur cursus. Sed ut velit eu enim vestibulum mollis eu sed augue. Fusce nec sapien in eros laoreet aliquam id id dolor. Maecenas malesuada magna sit amet sollicitudin volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+
+    Nulla quis mauris et magna aliquam pharetra. Vivamus sit amet iaculis augue, et congue neque. Ut sodales massa vitae quam molestie, sit amet ultrices tellus rutrum.`,
+  },
+  {
+    title: "Har jag ansvar för min kompis pengar?",
+    category: Category.har_jag_rad,
+    answer: `Phasellus egestas ante id orci consectetur tempor. Duis purus nulla, pharetra tristique felis sit amet, luctus molestie odio. Vestibulum non elit erat. Integer ipsum nibh, elementum nec dolor sit amet, ultricies dictum mauris. Fusce vitae imperdiet lectus. Praesent mollis, neque in tempus varius, felis arcu elementum orci, sed tincidunt urna orci a dolor. Cras elementum nulla vel nisl efficitur cursus. Sed ut velit eu enim vestibulum mollis eu sed augue. Fusce nec sapien in eros laoreet aliquam id id dolor. Maecenas malesuada magna sit amet sollicitudin volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+
+    Nulla quis mauris et magna aliquam pharetra. Vivamus sit amet iaculis augue, et congue neque. Ut sodales massa vitae quam molestie, sit amet ultrices tellus rutrum.`,
+  },
+  {
+    title: "Hur gör jag en budget?",
+    category: Category.ordlista,
+    answer: `Phasellus egestas ante id orci consectetur tempor. Duis purus nulla, pharetra tristique felis sit amet, luctus molestie odio. Vestibulum non elit erat. Integer ipsum nibh, elementum nec dolor sit amet, ultricies dictum mauris. Fusce vitae imperdiet lectus. Praesent mollis, neque in tempus varius, felis arcu elementum orci, sed tincidunt urna orci a dolor. Cras elementum nulla vel nisl efficitur cursus. Sed ut velit eu enim vestibulum mollis eu sed augue. Fusce nec sapien in eros laoreet aliquam id id dolor. Maecenas malesuada magna sit amet sollicitudin volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+
+    Nulla quis mauris et magna aliquam pharetra. Vivamus sit amet iaculis augue, et congue neque. Ut sodales massa vitae quam molestie, sit amet ultrices tellus rutrum.`,
+  },
+  {
+    title: "Varför kan en budget vara bra att ha?",
+    category: Category.jag_angrar_mig,
+    answer: `Phasellus egestas ante id orci consectetur tempor. Duis purus nulla, pharetra tristique felis sit amet, luctus molestie odio. Vestibulum non elit erat. Integer ipsum nibh, elementum nec dolor sit amet, ultricies dictum mauris. Fusce vitae imperdiet lectus. Praesent mollis, neque in tempus varius, felis arcu elementum orci, sed tincidunt urna orci a dolor. Cras elementum nulla vel nisl efficitur cursus. Sed ut velit eu enim vestibulum mollis eu sed augue. Fusce nec sapien in eros laoreet aliquam id id dolor. Maecenas malesuada magna sit amet sollicitudin volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+
+    Nulla quis mauris et magna aliquam pharetra. Vivamus sit amet iaculis augue, et congue neque. Ut sodales massa vitae quam molestie, sit amet ultrices tellus rutrum.`,
   },
 ];
 
+const MAX_NUMBER_OF_ANSWERS = 8;
+
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [filter, setFilter] = useState(options[0]);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
+
+  const [searchResults, setSearchResults] = useState<Answer[]>([]);
+
+  useEffect(() => {
+    const search = searchTerm.toLowerCase();
+    const results = answers.filter(({ title, category }) => {
+      return (
+        title.toLowerCase().includes(search) ||
+        category.toLowerCase().includes(search)
+      );
+    });
+    if (filter.value === "relevans") {
+      const capped = results.slice(0, MAX_NUMBER_OF_ANSWERS);
+      setSearchResults(capped);
+    } else {
+      const filtered = results.filter(
+        (results) => filter.value === results.category
+      );
+      const capped = filtered.slice(0, MAX_NUMBER_OF_ANSWERS);
+      setSearchResults(capped);
+    }
+  }, [searchTerm, filter]);
 
   return (
     <>
@@ -118,6 +187,12 @@ const Index = () => {
                     components={{
                       IndicatorSeparator: () => null,
                     }}
+                    value={filter}
+                    onChange={(item) => {
+                      if (item) {
+                        setFilter(item);
+                      }
+                    }}
                   />
                 </div>
                 <div className="py-4 items-center flex ">
@@ -138,7 +213,7 @@ const Index = () => {
                   <p className="font-semibold py-1 text-base uppercase ml-5 mb-4 ">
                     Resultat
                   </p>
-                  <Accordion options={answers} />
+                  <Accordion options={searchResults} />
                 </div>
               </div>
             </Container>
