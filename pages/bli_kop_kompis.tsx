@@ -19,7 +19,7 @@ const Index = () => {
         <article>
           <Container>
             <div className="max-w-screen-lg lg:mx-auto">
-              <h1 className="mb-36">Bli köpkompis</h1>
+              <h1 className="mb-14">Bli köpkompis</h1>
               <div className="mb-10">
                 <h2>Köpkompis, verkar intressant men hur går det till?</h2>
                 <p>
@@ -35,7 +35,7 @@ const Index = () => {
                   och enkelt!
                 </p>
               </div>
-              <div className="mb-10">
+              <div className="mb-14">
                 <h2>Hur skiljer det sig från att vara god man?</h2>
                 <p>
                   Som god man kan du som nära anhörig företräda en person över
@@ -76,7 +76,7 @@ const Index = () => {
               />
             </Container>
           </section>
-          <section className="py-24">
+          <section className="py-36">
             <Container>
               <div className="flex flex-col sm:flex-row justify-evenly">
                 <IconLink

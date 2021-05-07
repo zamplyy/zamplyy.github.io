@@ -118,7 +118,7 @@ const Blogg = (props: Props) => {
                   ))}
                 </div>
               </div>
-              <div className="grid grid-cols-4 gap-8">
+              <div className="grid grid-cols-4 gap-8 mb-36">
                 <div className="col-span-4 md:col-span-3">
                   <ul>
                     {searchResults.map(
@@ -190,7 +190,7 @@ const Blogg = (props: Props) => {
               </div>
             </Container>
           </section>
-          <section className="py-24">
+          <section className="py-36">
             <Container>
               <div className="flex flex-col sm:flex-row justify-evenly">
                 <IconLink

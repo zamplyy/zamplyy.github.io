@@ -117,10 +117,12 @@ const RegretGuide = (props: Props) => {
 
   const renderStartPage = () => {
     return (
-      <div className="flex flex-col flex-grow px-10 py-2">
-        <h3 className="font-bold text-3xl py-7">Har du ångrat dig?</h3>
-        <p>Klicka på knappen så sätter vi igång!</p>
-        <div className="self-center my-5">
+      <div className="flex flex-col flex-grow px-10 py-2 justify-between">
+        <div>
+          <h3 className="font-bold text-3xl py-7">Har du ångrat dig?</h3>
+          <p>Klicka på knappen så sätter vi igång!</p>
+        </div>
+        <div className="self-center pb-7">
           <RoundButton text="Starta guiden" onClick={() => startQuiz()} />
         </div>
       </div>
@@ -194,7 +196,7 @@ const RegretGuide = (props: Props) => {
   };
 
   return (
-    <div className="flex justify-center mb-14">
+    <div className="flex justify-center my-14">
       <Card height={page === Page.start ? 275 : 425} width={820}>
         {getPage()}
       </Card>

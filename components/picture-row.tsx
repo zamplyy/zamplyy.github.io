@@ -11,7 +11,7 @@ type Props = {
 const PictureRow = ({ imageUrl, text, title, imageIsLeft }: Props) => {
   return (
     <div
-      className={`max-w-screen-lg mx-auto flex flex-col my-14 items-center sm:items-start justify-between ${
+      className={`max-w-screen-lg mx-auto flex flex-col my-40 items-center sm:items-start justify-between ${
         imageIsLeft ? "sm:flex-row-reverse" : "sm:flex-row"
       } `}
     >

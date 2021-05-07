@@ -33,7 +33,7 @@ const Index = () => {
                     är alltid värt ett försök.
                   </p>
                 </div>
-                <div className="mt-5 -mb-72 z-10 lg:mt-0 lg:-mb-0 flex-grow max-w-xl">
+                <div className=" mt-5 -mb-72 z-10 lg:mt-0 lg:-mb-24 flex-grow max-w-xl ">
                   <div className="hidden lg:flex lg:absolute z-0 rounded-full h-96 w-96 ml-4 bg-accent-2 bg-opacity-10" />
                   <div className="hidden lg:flex lg:absolute z-0 rounded-full h-80 w-80 mt-24 ml-56 bg-accent-2 bg-opacity-20" />
                   <img
@@ -49,7 +49,7 @@ const Index = () => {
               <RegretGuide />
             </Container>
           </section>
-          <section className="py-24">
+          <section className="py-36">
             <Container>
               <div className="flex flex-col sm:flex-row justify-evenly">
                 <IconLink

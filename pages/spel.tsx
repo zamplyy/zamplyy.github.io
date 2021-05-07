@@ -45,7 +45,7 @@ const Index = () => {
                 <p>För att spela spelet öppna hemsidan på en större skärm!</p>
               </Container>
             </section>
-            <section className="py-24">
+            <section className="py-36">
               <Container>
                 <div className="flex flex-col sm:flex-row justify-evenly">
                   <IconLink

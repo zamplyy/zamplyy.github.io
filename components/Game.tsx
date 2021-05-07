@@ -257,7 +257,7 @@ export function Game() {
   };
 
   return (
-    <motion.div className="py-10 max-w-screen-lg lg:mx-auto">
+    <motion.div className="pt-24 pb-10 max-w-screen-lg lg:mx-auto">
       <div className="grid grid-cols-6 gap-4 gap-y-16 text-center mt-12">
         <ItemContainerView
           item={question.item}
@@ -267,7 +267,7 @@ export function Game() {
           id="question_item"
         />
         <div className="col-span-2 flex justify-center relative">
-          <div className="p-4 bg-white absolute rounded-xl -top-24 left-4 -right-20">
+          <div className="p-4 bg-white absolute rounded-xl -top-28 left-4 -right-20">
             <p className="text-base">{BourseTalking()}</p>
           </div>
           <div className="flex">{Bourse()}</div>

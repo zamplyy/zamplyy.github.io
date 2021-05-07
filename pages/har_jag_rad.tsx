@@ -22,7 +22,7 @@ const Index = () => {
           <Container>
             <h1 className="max-w-screen-lg lg:mx-auto">Har jag råd</h1>
           </Container>
-          <section className="py-10 mt-5">
+          <section className="pt-10 mt-5">
             <Container>
               <div className="max-w-screen-lg lg:mx-auto">
                 <h2 className="font-bold text-3xl">
@@ -36,12 +36,12 @@ const Index = () => {
               </div>
             </Container>
           </section>
-          <section>
+          <section className="py-32">
             <Container>
               <AffordCalculator />
             </Container>
           </section>
-          <section className=" bg-accent-1">
+          <section className="py-16 bg-accent-1">
             <Container>
               <div className="flex flex-col md:flex-row items-center space-y-6 pt-12 pb-20 md:justify-center md:space-x-10 md:py-24">
                 <Card width={300} height={300}>
@@ -62,7 +62,7 @@ const Index = () => {
               </div>
             </Container>
           </section>
-          <section className="py-24">
+          <section className="py-36">
             <Container>
               <div className="flex flex-col sm:flex-row justify-evenly">
                 <IconLink

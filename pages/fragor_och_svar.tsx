@@ -3,13 +3,14 @@ import Layout from "../components/layout";
 import Head from "next/head";
 import Header from "../components/header";
 import Select from "react-select";
-import { RoundButton } from "../components/roundButton";
 import Search from "../public/assets/icons/search2.svg";
 import React, { useState, ChangeEvent, useEffect } from "react";
 import { IconLink } from "../components/IconLink";
 import Friend from "../public/assets/icons/friend.svg";
 import Tag from "../public/assets/icons/tag.svg";
 import { Accordion } from "../components/Accordion";
+import { RoundButton } from "../components/roundButton";
+import Modal from "../components/Modal";
 
 enum Category {
   har_jag_rad = "har_jag_rad",
@@ -123,6 +124,8 @@ const answers: Answer[] = [
 const MAX_NUMBER_OF_ANSWERS = 8;
 
 const Index = () => {
+  const [showModal, setShowModal] = useState(false);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState(options[0]);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -195,18 +198,13 @@ const Index = () => {
                     }}
                   />
                 </div>
-                <div className="py-4 items-center flex ">
+                <div className="py-4 max-w-xl items-center flex ">
                   <input
                     type="text"
                     placeholder="Sök"
                     value={searchTerm}
                     onChange={handleChange}
                     className="bg-white border-4 border-gray-400 rounded-full px-5 py-4 flex-grow text-lg"
-                  />
-                  <RoundButton
-                    text="Sök"
-                    onClick={() => console.log("hej")}
-                    icon={<Search />}
                   />
                 </div>
                 <div className="flex flex-col rounded-4xl bg-accent-1 p-20">
@@ -215,10 +213,17 @@ const Index = () => {
                   </p>
                   <Accordion options={searchResults} />
                 </div>
+                <div className="flex flex-col items-center py-4">
+                  <p className="py-2">Hittade du inte svaret du sökte?</p>
+                  <RoundButton
+                    text="Ställ din fråga"
+                    onClick={() => setShowModal(true)}
+                  />
+                </div>
               </div>
             </Container>
           </section>
-          <section className="py-24">
+          <section className="py-36">
             <Container>
               <div className="flex flex-col sm:flex-row justify-evenly">
                 <IconLink
@@ -236,6 +241,13 @@ const Index = () => {
               </div>
             </Container>
           </section>
+          <Modal
+            title="Fråga börsen!"
+            show={showModal}
+            onClose={() => setShowModal(false)}
+          >
+            <p>Ställ din fråga</p>
+          </Modal>
         </article>
       </Layout>
     </>

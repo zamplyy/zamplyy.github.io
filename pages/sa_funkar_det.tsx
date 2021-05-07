@@ -20,11 +20,11 @@ const Index = () => {
         <article>
           <Container>
             <h1 className="max-w-screen-lg lg:mx-auto">Så funkar det</h1>
-            <div className="pt-20 max-w-screen-lg lg:mx-auto">
+            <div className="pt-20 max-w-screen-lg lg:mx-auto mb-36">
               <ResponsivePlayer url="/assets/promo-video.mp4" controls />
             </div>
           </Container>
-          <section className="py-20 bg-accent-1 mt-20">
+          <section className="py-20 bg-accent-1 ">
             <Container>
               <PictureRow
                 imageUrl="/assets/money1.jpg"
@@ -44,7 +44,7 @@ const Index = () => {
               />
             </Container>
           </section>
-          <section className="py-24">
+          <section className="py-36">
             <Container>
               <div className="flex flex-col sm:flex-row justify-evenly">
                 <IconLink

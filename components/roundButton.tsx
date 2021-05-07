@@ -18,7 +18,7 @@ export function RoundButton(props: Props) {
       disabled={disabled}
     >
       <div
-        className={` flex flex-row justify-center ${
+        className={` flex flex-row  ${icon ? "" : "justify-center"} ${
           disabled ? "opacity-70" : null
         }`}
       >

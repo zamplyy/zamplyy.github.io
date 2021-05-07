@@ -21,7 +21,7 @@ const AccordionItem = ({
   index,
 }: AccordionItemProps) => {
   return (
-    <motion.li className="rounded-3xl bg-white py-2 px-4 my-3 cursor-pointer">
+    <motion.li className="rounded-3xl bg-white py-4 px-8 my-2 cursor-pointer">
       <div className="flex justify-between" onClick={() => handleClick(index)}>
         <button>
           <p>{option.title}</p>
