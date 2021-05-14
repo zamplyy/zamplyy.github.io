@@ -3,20 +3,26 @@ import Layout from "../components/layout";
 import Head from "next/head";
 import Header from "../components/header";
 import Select from "react-select";
-import Search from "../public/assets/icons/search2.svg";
 import React, { useState, ChangeEvent, useEffect } from "react";
 import { IconLink } from "../components/IconLink";
 import Friend from "../public/assets/icons/friend.svg";
 import Tag from "../public/assets/icons/tag.svg";
+import BourseBody from "../public/assets/bourse_body_neutral.svg";
 import { Accordion } from "../components/Accordion";
 import { RoundButton } from "../components/roundButton";
 import Modal from "../components/Modal";
+import { useForm } from "react-hook-form";
 
 enum Category {
   har_jag_rad = "har_jag_rad",
   bli_kop_kompis = "bli_kop_kompis",
   jag_angrar_mig = "jag_angrar_mig",
   ordlista = "ordlista",
+}
+interface FormInput {
+  name: string;
+  email: string;
+  question: string;
 }
 
 const options = [
@@ -125,6 +131,7 @@ const MAX_NUMBER_OF_ANSWERS = 8;
 
 const Index = () => {
   const [showModal, setShowModal] = useState(false);
+  const [modalSubmitted, setModalSubmitted] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState(options[0]);
@@ -133,6 +140,15 @@ const Index = () => {
   };
 
   const [searchResults, setSearchResults] = useState<Answer[]>([]);
+
+  const { register, handleSubmit, errors } = useForm<FormInput>({
+    mode: "onBlur",
+  });
+
+  const onSubmit = (data: FormInput) => {
+    // Send email and now display next screen
+    setModalSubmitted(true);
+  };
 
   useEffect(() => {
     const search = searchTerm.toLowerCase();
@@ -198,7 +214,7 @@ const Index = () => {
                     }}
                   />
                 </div>
-                <div className="py-4 max-w-xl items-center flex ">
+                <div className="py-4 max-w-xl items-center flex mb-4">
                   <input
                     type="text"
                     placeholder="Sök"
@@ -207,8 +223,8 @@ const Index = () => {
                     className="bg-white border-4 border-gray-400 rounded-full px-5 py-4 flex-grow text-lg"
                   />
                 </div>
-                <div className="flex flex-col rounded-4xl bg-accent-1 p-20">
-                  <p className="font-semibold py-1 text-base uppercase ml-5 mb-4 ">
+                <div className="flex flex-col rounded-4xl bg-accent-1 p-3 md:p-20">
+                  <p className="font-semibold py-1 text-base uppercase ml-5 mb-4 mt-2 md:mt-0 ">
                     Resultat
                   </p>
                   <Accordion options={searchResults} />
@@ -244,9 +260,101 @@ const Index = () => {
           <Modal
             title="Fråga börsen!"
             show={showModal}
-            onClose={() => setShowModal(false)}
+            onClose={() => {
+              setShowModal(false);
+              setModalSubmitted(false);
+            }}
           >
-            <p>Ställ din fråga</p>
+            {!modalSubmitted ? (
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                <div className="flex flex-col space-y-5">
+                  <label
+                    htmlFor="name"
+                    className={`text-2xl pl-5 ${
+                      errors.name ? "text-red-500" : null
+                    }`}
+                  >
+                    Skriv ditt namn
+                  </label>
+
+                  <input
+                    name="name"
+                    type="text"
+                    placeholder="Namn"
+                    className="p-3 pl-5 rounded-full text-2xl"
+                    ref={register({
+                      required: "*",
+                    })}
+                  />
+                  <label
+                    htmlFor="email"
+                    className={`text-2xl pl-5 ${
+                      errors.email ? "text-red-500" : null
+                    }`}
+                  >
+                    Skriv din email-adress
+                  </label>
+
+                  <input
+                    name="email"
+                    type="email"
+                    placeholder="Mailadress"
+                    className="p-3 pl-5 rounded-full text-2xl"
+                    ref={register({
+                      required: "Enter your e-mail",
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                        message: "Enter a valid e-mail address",
+                      },
+                    })}
+                  />
+                  {errors.email && errors.email.message ? (
+                    <p className="pl-5 text-base text-red-500">
+                      {errors.email.message}
+                    </p>
+                  ) : null}
+                  <label
+                    htmlFor="question"
+                    className={`text-2xl pl-5 ${
+                      errors.question ? "text-red-500" : null
+                    }`}
+                  >
+                    Skriv din fråga
+                  </label>
+                  <textarea
+                    className="resize-none border rounded-3xl p-3 pl-5 text-2xl"
+                    name="question"
+                    rows={4}
+                    placeholder="Vad undrar du?"
+                    ref={register({
+                      required: "*",
+                    })}
+                  ></textarea>
+                  <div className="justify-center flex py-4">
+                    <button
+                      className="bg-accent-2 text-white font-semibold text-l px-14 py-3 rounded-full hover:underline "
+                      type="submit"
+                    >
+                      Skicka in frågan
+                    </button>
+                  </div>
+                </div>
+              </form>
+            ) : (
+              <div className="flex flex-col items-center">
+                <h1 className="py-4">Tack för din fråga</h1>
+                <p className="py-4">
+                  Våra experter jobbar på att besvara den. Du får ett mail när
+                  svaret är klart.
+                </p>
+                <div className="-mb-8 sm:-mb-16">
+                  <img
+                    src="/assets/bourse_body_neutral.svg"
+                    alt="Bourse body neutral"
+                  ></img>
+                </div>
+              </div>
+            )}
           </Modal>
         </article>
       </Layout>

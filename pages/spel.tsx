@@ -42,7 +42,9 @@ const Index = () => {
             </section>
             <section className="py-20 bg-accent-1 mt-20 block lg:hidden">
               <Container>
-                <p>För att spela spelet öppna hemsidan på en större skärm!</p>
+                <p className="text-white">
+                  För att spela spelet öppna hemsidan på en större skärm!
+                </p>
               </Container>
             </section>
             <section className="py-36">

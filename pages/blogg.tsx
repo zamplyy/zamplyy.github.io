@@ -30,8 +30,9 @@ const Blogg = (props: Props) => {
   const { allPostsData, uniquePostCategories } = props;
 
   const getCategoryColor = (category: string) => {
-    const color = uniquePostCategories.find((cat) => cat.name === category)
-      ?.color;
+    const color = uniquePostCategories.find(
+      (cat) => cat.name === category
+    )?.color;
     if (color) return color;
     return "#ff0000";
   };
@@ -124,13 +125,15 @@ const Blogg = (props: Props) => {
                     {searchResults.map(
                       ({ id, date, title, author, category, readingTime }) => (
                         <li key={id}>
-                          <div className="flex flex-row pb-14">
-                            <div
-                              className="hidden sm:block w-40 flex-shrink-0"
-                              style={{
-                                backgroundColor: getCategoryColor(category),
-                              }}
-                            ></div>
+                          <div className="flex flex-row pb-14 ">
+                            <div className="pt-2">
+                              <div
+                                className="hidden sm:block w-40 flex-shrink-0 h-40 self-center"
+                                style={{
+                                  backgroundColor: getCategoryColor(category),
+                                }}
+                              ></div>
+                            </div>
                             <div className="pt-2 pr-2 sm:px-8">
                               <UserIcon />
                             </div>

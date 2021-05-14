@@ -21,7 +21,7 @@ const AccordionItem = ({
   index,
 }: AccordionItemProps) => {
   return (
-    <motion.li className="rounded-3xl bg-white py-4 px-8 my-2 cursor-pointer">
+    <motion.li className="rounded-3xl bg-white py-2 md:py-4 md:px-8 px-2  my-2 cursor-pointer">
       <div className="flex justify-between" onClick={() => handleClick(index)}>
         <button>
           <p>{option.title}</p>
@@ -33,7 +33,7 @@ const AccordionItem = ({
       <AnimatePresence>
         {isActive && (
           <motion.p
-            className="text-lg"
+            className="text-lg whitespace-pre-line"
             key={option.title}
             initial={{ height: 0, opacity: 0, marginBottom: 0 }}
             animate={{ height: "auto", opacity: 1, marginBottom: 12 }}
@@ -63,15 +63,19 @@ export function Accordion(props: AccordionProps) {
 
   return (
     <ul>
-      {options.map((option, i) => (
-        <AccordionItem
-          key={option.category + i}
-          option={option}
-          index={i}
-          isActive={activeIndex === i}
-          handleClick={handleClick}
-        />
-      ))}
+      {options.length > 0 ? (
+        options.map((option, i) => (
+          <AccordionItem
+            key={option.category + i}
+            option={option}
+            index={i}
+            isActive={activeIndex === i}
+            handleClick={handleClick}
+          />
+        ))
+      ) : (
+        <p className="pl-5">Inga sökresultat</p>
+      )}
     </ul>
   );
 }

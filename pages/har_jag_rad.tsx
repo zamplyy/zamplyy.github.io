@@ -9,8 +9,13 @@ import { IconLink } from "../components/IconLink";
 
 import Tag from "../public/assets/icons/tag.svg";
 import Regret from "../public/assets/icons/regret.svg";
+import useWindowSize from "../utils/useWindowSize";
 
 const Index = () => {
+  const { width } = useWindowSize();
+
+  const breakpoint = width && width < 490;
+
   return (
     <>
       <Layout>
@@ -36,7 +41,7 @@ const Index = () => {
               </div>
             </Container>
           </section>
-          <section className="py-32">
+          <section className="py-32 sm:block">
             <Container>
               <AffordCalculator />
             </Container>
@@ -44,21 +49,30 @@ const Index = () => {
           <section className="py-16 bg-accent-1">
             <Container>
               <div className="flex flex-col md:flex-row items-center space-y-6 pt-12 pb-20 md:justify-center md:space-x-10 md:py-24">
-                <Card width={300} height={300}>
-                  <div className="p-5 flex flex-col items-center justify-center flex-grow">
-                    <img src={`/assets/bourse-tilted.svg`} />
+                <div className="flex h-80 relative">
+                  <div className="hidden md:block md:mr-52">
+                    <Card width={300} height={300}>
+                      <div className="p-5 flex flex-col items-center justify-center flex-grow">
+                        <img src={`/assets/bourse-tilted.svg`} />
+                      </div>
+                    </Card>
                   </div>
-                </Card>
-                <Card width={320} height={230}>
-                  <div className="flex flex-col flex-grow relative">
-                    <p className="italic font-semibold text-9xl text-left pl-5">
-                      “
-                    </p>
-                    <p className="italic font-semibold text-2xl absolute top-24 left-10">
-                      Det är coolt att ha koll!
-                    </p>
+                  <div className="relative md:absolute z-20 md:left-44 md:top-6">
+                    <Card
+                      width={breakpoint ? 300 : 420}
+                      height={breakpoint ? 200 : 230}
+                    >
+                      <div className="flex flex-col flex-grow relative">
+                        <p className="italic font-semibold text-9xl text-left pl-5">
+                          “
+                        </p>
+                        <p className="italic font-semibold text-2xl absolute top-24 left-10">
+                          Det är coolt att ha koll!
+                        </p>
+                      </div>
+                    </Card>
                   </div>
-                </Card>
+                </div>
               </div>
             </Container>
           </section>

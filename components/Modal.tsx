@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Close from "../public/assets/icons/close.svg";
+import Container from "./container";
 
 type ModalProps = {
   show: boolean;
   onClose: () => any;
-  children: React.ReactElement;
-  title: string;
+  children?: React.ReactElement | null;
+  title?: string;
 };
 
 const Modal = (props: ModalProps) => {
@@ -24,16 +25,17 @@ const Modal = (props: ModalProps) => {
   };
 
   const modalContent = show ? (
-    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-75">
-      <div className="bg-white w-96 h-96 rounded-2xl p-4">
-        <div className="flex justify-end text-2xl">
-          <button onClick={handleCloseClick}>
-            <Close />
-          </button>
+    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-75 z-40">
+      <Container>
+        <div className="bg-modalBackground flex-grow rounded-2xl p-4 sm:p-12">
+          <div className="flex justify-end text-2xl">
+            <button onClick={handleCloseClick}>
+              <Close />
+            </button>
+          </div>
+          <div className="pt-3 m-4">{children}</div>
         </div>
-        {title && <h2>{title}</h2>}
-        <div className="pt-3">{children}</div>
-      </div>
+      </Container>
     </div>
   ) : null;
 

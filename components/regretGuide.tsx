@@ -6,6 +6,7 @@ import Close from "../public/assets/icons/close.svg";
 import Drinks from "../public/assets/icons/dryck.svg";
 import Clothes from "../public/assets/icons/klader.svg";
 import Other from "../public/assets/icons/annat.svg";
+import useWindowSize from "../utils/useWindowSize";
 
 type Props = {};
 
@@ -62,6 +63,10 @@ const RegretGuide = (props: Props) => {
   const [page, setPage] = useState<Page>(Page.start);
   const [currentQuestion, setCurrentQuestion] = useState<Question>();
   const [answers, setAnswers] = useState<QuestionAnswer[]>([]);
+
+  const { width } = useWindowSize();
+
+  const breakpoint = width && width < 840;
 
   const startQuiz = () => {
     setAnswers([]);
@@ -120,10 +125,17 @@ const RegretGuide = (props: Props) => {
       <div className="flex flex-col flex-grow px-10 py-2 justify-between">
         <div>
           <h3 className="font-bold text-3xl py-7">Har du ångrat dig?</h3>
-          <p>Klicka på knappen så sätter vi igång!</p>
+          {breakpoint ? (
+            <p>Öppna hemsidan på datorn så sätter vi igång!</p>
+          ) : (
+            <p>Klicka på knappen så sätter vi igång!</p>
+          )}
         </div>
         <div className="self-center pb-7">
-          <RoundButton text="Starta guiden" onClick={() => startQuiz()} />
+          <RoundButton
+            text="Starta guiden"
+            onClick={() => (breakpoint ? null : startQuiz())}
+          />
         </div>
       </div>
     );
@@ -197,7 +209,10 @@ const RegretGuide = (props: Props) => {
 
   return (
     <div className="flex justify-center my-14">
-      <Card height={page === Page.start ? 275 : 425} width={820}>
+      <Card
+        height={page === Page.start ? 275 : 425}
+        width={breakpoint ? 350 : 820}
+      >
         {getPage()}
       </Card>
     </div>

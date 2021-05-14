@@ -28,12 +28,12 @@ const Index = () => {
           <section>
             <Container>
               <h1 className="max-w-screen-lg lg:mx-auto">Om oss</h1>
-              <div className="flex justify-end ">
+              <div className="flex justify-end">
                 <img
                   src={"/assets/bourse_standing.svg"}
-                  className="absolute z-0 -left-10  lg:z-10 hidden md:block"
+                  className="absolute z-0 -left-36 mt-10 lg:z-10 hidden md:block"
                 />
-                <div className="md:w-2/5 lg:w-1/2 pb-8 z-10 lg:z-0 pt-5">
+                <div className="md:w-2/5 lg:w-3/5 pb-8 z-10 lg:z-0 mt-10 mb-14  ">
                   <h2>Vad hur varför</h2>
                   <p>
                     SEO-optimerad text om hur vi vann PTS tävlingen. Denna text
@@ -61,9 +61,6 @@ const Index = () => {
                 </div>
               </div>
             </Container>
-          </section>
-          <section>
-            <Container></Container>
           </section>
           <section>
             <Quotes quotes={quotes} />

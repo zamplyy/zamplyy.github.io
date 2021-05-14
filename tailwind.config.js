@@ -14,6 +14,7 @@ module.exports = {
         border: "#C4C4C4",
         good: "#C2E4D8",
         bad: "#F2C8C2",
+        modalBackground: "#FFE0CC",
       },
       borderRadius: {
         "4xl": "40px",

@@ -1,6 +1,7 @@
 import React, { CSSProperties } from "react";
 import { Carousel } from "react-responsive-carousel";
 import { Quote } from "../pages";
+import useWindowSize from "../utils/useWindowSize";
 import Card from "./card";
 
 const arrowStyles: CSSProperties = {
@@ -24,6 +25,11 @@ type Props = {
 };
 export function Quotes(props: Props) {
   const { quotes } = props;
+
+  const { width } = useWindowSize();
+
+  const breakpoint = width && width < 540;
+
   return (
     <Carousel
       infiniteLoop
@@ -58,7 +64,15 @@ export function Quotes(props: Props) {
         if (isSelected) {
           return (
             <li
-              style={{ ...indicatorStyles, backgroundColor: "#E0EBEB" }}
+              style={
+                breakpoint
+                  ? {
+                      ...indicatorStyles,
+                      backgroundColor: "#E0EBEB",
+                      margin: "16px 8px",
+                    }
+                  : { ...indicatorStyles, backgroundColor: "#E0EBEB" }
+              }
               aria-label={`Selected: ${label} ${index + 1}`}
               title={`Selected: ${label} ${index + 1}`}
             />
@@ -66,7 +80,11 @@ export function Quotes(props: Props) {
         }
         return (
           <li
-            style={indicatorStyles}
+            style={
+              breakpoint
+                ? { ...indicatorStyles, margin: "16px 8px" }
+                : indicatorStyles
+            }
             onClick={onClickHandler}
             onKeyDown={onClickHandler}
             value={index}
@@ -83,9 +101,12 @@ export function Quotes(props: Props) {
         return (
           <div
             key={index}
-            className="flex flex-col md:flex-row items-center space-y-6 pt-12 pb-20 md:justify-center md:space-x-10 bg-accent-1 md:pt-24 md:pb-36"
+            className="flex flex-col md:flex-row items-center space-y-12 pt-12 pb-20 md:justify-center md:space-x-10 bg-accent-1 md:pt-24 md:pb-36"
           >
-            <Card width={300} height={300}>
+            <Card
+              width={breakpoint ? 200 : 350}
+              height={breakpoint ? 200 : 350}
+            >
               <div className="p-5 flex flex-col items-center justify-center flex-grow">
                 <img
                   src={`/assets/money${index}.jpg`}
@@ -93,12 +114,19 @@ export function Quotes(props: Props) {
                 />
               </div>
             </Card>
-            <Card width={320} height={230}>
+            <Card
+              width={breakpoint ? 210 : 420}
+              height={breakpoint ? 240 : 230}
+            >
               <div className="flex flex-col flex-grow relative">
                 <p className="italic font-semibold text-9xl text-left pl-5">
                   “
                 </p>
-                <p className="italic font-semibold text-2xl absolute top-16 text-center p-3">
+                <p
+                  className={`italic font-semibold text-2xl absolute text-center p-3  ${
+                    breakpoint ? "top-10" : "top-16"
+                  }`}
+                >
                   {quote.quote}
                 </p>
               </div>

@@ -1,6 +1,7 @@
 import Card from "./card";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import useWindowSize from "../utils/useWindowSize";
 // import starUrl, { ReactComponent as Star } from './star.svg'
 // import ThumbsUpUrl from "../public/assets/icons/thumbs-up.svg";
 
@@ -58,6 +59,10 @@ const AffordCalculator = (props: Props) => {
   const [moneyLeft, setMoneyLeft] = useState<number>();
   const [calculatedPage, setCalculatedPage] = useState<CalculatedPage>();
 
+  const { width } = useWindowSize();
+
+  const breakpoint = width && width < 640;
+
   const onSubmit = (data: FormInput) => {
     const moneyLeft = data.bankAccount - data.cost;
     setMoneyLeft(moneyLeft);
@@ -74,7 +79,7 @@ const AffordCalculator = (props: Props) => {
 
   const renderInputPage = () => {
     return (
-      <div className="flex flex-col flex-grow px-16 py-12">
+      <div className="flex flex-col flex-grow px-4 py-3 sm:px-16 sm:py-12 ">
         <h3 className="font-bold text-2xl my-5">Kolla om du har råd</h3>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div className="flex flex-col space-y-5">
@@ -131,7 +136,7 @@ const AffordCalculator = (props: Props) => {
   const renderCalculatedPage = () => {
     return (
       <div
-        className={`flex flex-col flex-grow px-16 py-12 ${
+        className={`flex flex-col flex-grow px-4 py-3 sm:px-16 sm:py-12 justify-center sm:justify-start ${
           calculatedPage?.canAfford ? "bg-good" : "bg-bad"
         }`}
       >
@@ -157,7 +162,7 @@ const AffordCalculator = (props: Props) => {
 
   return (
     <div className="flex justify-center mb-14">
-      <Card height={500} width={500}>
+      <Card height={breakpoint ? 500 : 500} width={breakpoint ? 300 : 500}>
         {page === Page.input ? renderInputPage() : renderCalculatedPage()}
       </Card>
     </div>

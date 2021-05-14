@@ -26,14 +26,14 @@ const Index = () => {
                   <h2 className="mb-10">
                     Visst får man ångra sina köp! Jag hjälper dig.
                   </h2>
-                  <p>
+                  <p className="mb-20">
                     Det är helt ok att ångra sina köp. Denna guide hjälper dig
                     reda ut vad du kan göra. Det är inte helt säkert att du kan
                     lämna tillbaka det du köpt och få tillbaka pengarna. Men det
                     är alltid värt ett försök.
                   </p>
                 </div>
-                <div className=" mt-5 -mb-72 z-10 lg:mt-0 lg:-mb-24 flex-grow max-w-xl ">
+                <div className=" mt-5 -mb-72 z-10 lg:mt-28 lg:-mb-24 flex-grow max-w-xl ">
                   <div className="hidden lg:flex lg:absolute z-0 rounded-full h-96 w-96 ml-4 bg-accent-2 bg-opacity-10" />
                   <div className="hidden lg:flex lg:absolute z-0 rounded-full h-80 w-80 mt-24 ml-56 bg-accent-2 bg-opacity-20" />
                   <img
