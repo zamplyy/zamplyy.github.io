@@ -14,19 +14,27 @@
 
 /* Your own custom utilities */
 @layer base {
+  a {
+    @apply text-text-color;
+    @apply dark:text-white;
+  }
   p {
     @apply text-text-color;
     @apply text-2xl;
     @apply leading-9;
+    @apply dark:text-white;
   }
   input {
     @apply text-text-color;
+    @apply dark:text-white;
   }
   label {
     @apply text-text-color;
+    @apply dark:text-white;
   }
   h3 {
     @apply text-text-color;
+    @apply dark:text-white;
   }
   h1 {
     @apply text-5xl;
@@ -35,12 +43,14 @@
     @apply tracking-wider;
     @apply text-text-color;
     @apply leading-tight;
+    @apply dark:text-white;
   }
   h2 {
     @apply text-3xl;
     @apply text-text-color;
     @apply leading-normal;
     @apply font-bold;
+    @apply dark:text-white;
   }
 }
 

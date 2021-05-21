@@ -33,11 +33,16 @@ const AccordionItem = ({
       <AnimatePresence>
         {isActive && (
           <motion.p
-            className="text-lg whitespace-pre-line"
+            className="whitespace-pre-line"
             key={option.title}
-            initial={{ height: 0, opacity: 0, marginBottom: 0 }}
-            animate={{ height: "auto", opacity: 1, marginBottom: 12 }}
-            exit={{ height: 0, opacity: 0, marginBottom: 0 }}
+            initial={{ height: 0, opacity: 0, marginBottom: 0, marginTop: 0 }}
+            animate={{
+              height: "auto",
+              opacity: 1,
+              marginBottom: 24,
+              marginTop: 24,
+            }}
+            exit={{ height: 0, opacity: 0, marginBottom: 0, marginTop: 0 }}
             transition={{ type: "tween" }}
           >
             {option.answer}

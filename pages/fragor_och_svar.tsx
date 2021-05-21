@@ -59,7 +59,11 @@ const answers: Answer[] = [
   {
     title: "Skillnad på vad jag behöver och vill ha?",
     category: Category.har_jag_rad,
-    answer: `Praesent mollis, neque in tempus varius, felis arcu elementum orci, sed tincidunt urna orci a dolor. Cras elementum nulla vel nisl efficitur cursus. Sed ut velit eu enim vestibulum mollis eu sed augue. Fusce nec sapien in eros laoreet aliquam id id dolor. Maecenas malesuada magna sit amet sollicitudin volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+    answer: `Praesent mollis, neque in tempus varius, felis arcu elementum orci, sed tincidunt urna orci a dolor. Cras elementum nulla vel nisl efficitur cursus. 
+    
+    Sed ut velit eu enim vestibulum mollis eu sed augue. Fusce nec sapien in eros laoreet aliquam id id dolor. 
+    
+    Maecenas malesuada magna sit amet sollicitudin volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
     Nulla quis mauris et magna aliquam pharetra. Vivamus sit amet iaculis augue, et congue neque. Ut sodales massa vitae quam molestie, sit amet ultrices tellus rutrum. Aliquam aliquet aliquam porttitor. Aliquam erat volutpat. Ut fringilla velit sed quam accumsan accumsan. Nullam non ullamcorper ipsum. Nam malesuada orci quis urna ultricies, suscipit scelerisque sapien elementum. Pellentesque scelerisque dolor vitae felis tristique, vitae consectetur sapien dignissim. Pellentesque a purus condimentum, hendrerit tortor pulvinar, semper ipsum. Morbi iaculis, nibh ac efficitur blandit, nisi lorem laoreet massa, eu rhoncus erat massa ac nibh. Interdum et malesuada fames ac ante ipsum primis in faucibus.`,
   },
   {
@@ -220,7 +224,7 @@ const Index = () => {
                     placeholder="Sök"
                     value={searchTerm}
                     onChange={handleChange}
-                    className="bg-white border-4 border-gray-400 rounded-full px-5 py-4 flex-grow text-lg"
+                    className="bg-white border-4 border-gray-400 rounded-full px-5 py-5 flex-grow text-lg"
                   />
                 </div>
                 <div className="flex flex-col rounded-4xl bg-accent-1 p-3 md:p-20">
@@ -301,7 +305,7 @@ const Index = () => {
                     placeholder="Mailadress"
                     className="p-3 pl-5 rounded-full text-2xl"
                     ref={register({
-                      required: "Enter your e-mail",
+                      required: "*",
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                         message: "Enter a valid e-mail address",

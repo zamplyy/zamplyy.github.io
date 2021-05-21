@@ -3,8 +3,10 @@ import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import useWindowSize from "../utils/useWindowSize";
-import Close from "../public/assets/icons/close-small.svg";
+import Close from "../public/assets/icons/close-menu.svg";
 import Hamburger from "../public/assets/icons/hamburger.svg";
+import DarkMode from "../public/assets/icons/dark-mode.svg";
+import { useTheme } from "next-themes";
 
 type Props = {};
 
@@ -12,6 +14,8 @@ const Header = (props: Props) => {
   const router = useRouter();
   const { width } = useWindowSize();
   const breakpoint = width && width < 1020;
+
+  const { theme, setTheme } = useTheme();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -29,9 +33,9 @@ const Header = (props: Props) => {
 
   const isActive = (link: string) => {
     if (router.asPath === link) {
-      return "border-opacity-1";
+      return true;
     } else {
-      return "border-opacity-0";
+      return false;
     }
   };
 
@@ -41,9 +45,11 @@ const Header = (props: Props) => {
         {pages.map((page) => (
           <Link href={page.link} key={page.link}>
             <a
-              className={`hover:border-opacity-100 border-b-4 border-accent-2 uppercase font-medium text-sm ${isActive(
-                page.link
-              )}`}
+              className={`hover:border-opacity-100 border-b-4 border-accent-2 dark:border-accent-1 uppercase font-medium text-sm ${
+                isActive(page.link)
+                  ? "border-opacity-1 dark:border-opacity-1"
+                  : "border-opacity-0 dark:border-opacity-0"
+              }`}
             >
               {page.title}
             </a>
@@ -56,19 +62,22 @@ const Header = (props: Props) => {
   const smallMenu = () => {
     return (
       <nav
-        className={`fixed right-0 top-0 bg-white border-accent-2 border-l-4  w-full h-full flex flex-col p-4 transition-transform transform ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed  -right-full top-0 bg-accent-1 w-full h-full flex flex-col overflow-auto ease-in-out transition-all duration-300 transform ${
+          isOpen ? "-translate-x-full" : "translate-x-0"
         } `}
       >
-        <div className="self-end pr-2" onClick={() => setIsOpen(false)}>
-          <Close />
+        <div className="flex justify-between bg-white bg-opacity-80 py-6 px-10 mb-4">
+          <img src={"/assets/logo.svg"} />
+          <div className="pr-2 self-center" onClick={() => setIsOpen(false)}>
+            <Close />
+          </div>
         </div>
         {pages.map((page) => (
           <Link href={page.link} key={page.link}>
             <a
-              className={`hover:border-opacity-100 border-b-4 border-accent-2 uppercase font-bold text-lg  ${isActive(
-                page.link
-              )}`}
+              className={`hover:border-opacity-100 uppercase text-lg py-2 px-4 font-jost font-normal  ${
+                isActive(page.link) ? "bg-white" : "bg-accent-1"
+              }`}
             >
               {page.title}
             </a>
@@ -80,7 +89,7 @@ const Header = (props: Props) => {
 
   return (
     <header
-      className={`fixed top-0 z-40 py-6 px-10 bg-white w-full ${
+      className={`fixed top-0 z-40 py-6 px-10 bg-white dark:bg-gray-800 w-full ${
         breakpoint ? "opacity-100 border-b-2 border-accent-1" : "opacity-95"
       } `}
     >
@@ -92,6 +101,12 @@ const Header = (props: Props) => {
             </a>
           </Link>
         </div>
+        <img
+          src="/assets/icons/dark-mode.svg"
+          className="w-8 h-8 filter invert"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        ></img>
+
         {breakpoint ? (
           <div className="pr-2" onClick={() => setIsOpen(true)}>
             <Hamburger />
