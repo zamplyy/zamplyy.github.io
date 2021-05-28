@@ -45,7 +45,7 @@ const AccordionItem = ({
             exit={{ height: 0, opacity: 0, marginBottom: 0, marginTop: 0 }}
             transition={{ type: "tween" }}
           >
-            {option.answer}
+            <span className="text-text-color">{option.answer}</span>
           </motion.p>
         )}
       </AnimatePresence>
