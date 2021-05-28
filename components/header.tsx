@@ -7,6 +7,7 @@ import Close from "../public/assets/icons/close-menu.svg";
 import Hamburger from "../public/assets/icons/hamburger.svg";
 import DarkMode from "../public/assets/icons/dark-mode.svg";
 import { useTheme } from "next-themes";
+import { motion } from "framer-motion";
 
 type Props = {};
 
@@ -18,6 +19,8 @@ const Header = (props: Props) => {
   const { theme, setTheme } = useTheme();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const currentColor = theme === "light" ? "#343434" : "#bababa";
 
   const pages = [
     { link: "/", title: "Hem" },
@@ -89,7 +92,7 @@ const Header = (props: Props) => {
 
   return (
     <header
-      className={`fixed top-0 z-40 py-6 px-10 bg-white dark:bg-gray-800 w-full ${
+      className={`fixed top-0 z-40 py-6 px-10 bg-white dark:bg-darkModeBackground w-full ${
         breakpoint ? "opacity-100 border-b-2 border-accent-1" : "opacity-95"
       } `}
     >
@@ -101,12 +104,16 @@ const Header = (props: Props) => {
             </a>
           </Link>
         </div>
-        <img
-          src="/assets/icons/dark-mode.svg"
-          className="w-8 h-8 filter invert"
+        <motion.div
+          className="w-10 h-10 flex items-center justify-center relative"
+          animate={{
+            // rotate: theme === "dark" ? 180 : 0,
+            rotateY: theme === "dark" ? 180 : 0,
+          }}
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        ></img>
-
+        >
+          <DarkMode fill={currentColor} />
+        </motion.div>
         {breakpoint ? (
           <div className="pr-2" onClick={() => setIsOpen(true)}>
             <Hamburger />

@@ -27,8 +27,8 @@ const Modal = (props: ModalProps) => {
   const modalContent = show ? (
     <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-75 z-40">
       <Container>
-        <div className="bg-modalBackground flex-grow rounded-2xl p-4 sm:p-12">
-          <div className="flex justify-end text-2xl">
+        <div className="bg-modalBackground flex-grow rounded-4xl p-4 sm:p-12">
+          <div className="flex justify-end text-2xl mr-6">
             <button onClick={handleCloseClick}>
               <Close />
             </button>

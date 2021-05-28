@@ -12,6 +12,8 @@ import { Accordion } from "../components/Accordion";
 import { RoundButton } from "../components/roundButton";
 import Modal from "../components/Modal";
 import { useForm } from "react-hook-form";
+import { useTheme } from "next-themes";
+import { SVGIconColors } from "../utils/constants";
 
 enum Category {
   har_jag_rad = "har_jag_rad",
@@ -47,6 +49,13 @@ const styles = {
     border: "4px solid rgba(156, 163, 175, 1)",
     fontSize: 25,
   }),
+  menu: (provided: any, state: any) => ({
+    ...provided,
+    borderRadius: 24,
+    paddingTop: 20,
+    paddingBottom: 20,
+    color: "#343434",
+  }),
 };
 
 export type Answer = {
@@ -70,63 +79,63 @@ const answers: Answer[] = [
     title: "Vad kan jag göra för att spara pengar?",
     category: Category.har_jag_rad,
     answer: `ullam molestie, odio id rhoncus placerat, nisl ipsum finibus metus, vel fermentum ligula magna faucibus eros. Curabitur volutpat, mi mattis tincidunt pulvinar, lorem nunc tristique ex, consequat lobortis mauris ante vitae lectus. Pellentesque arcu purus, iaculis vitae molestie eu, bibendum ac mi.
-
+    
     Pellentesque viverra nunc nisi, pellentesque cursus lorem fringilla sit amet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur congue, elit a molestie pellentesque, orci risus vulputate ante, iaculis condimentum lorem sapien iaculis dui. Aliquam erat volutpat. Vivamus non neque eget tortor sodales elementum. Praesent neque eros, dignissim eu erat eget, cursus scelerisque elit. `,
   },
   {
     title: "Hur handlar man “lagom”?",
     category: Category.har_jag_rad,
     answer: `am erat volutpat. Vivamus non neque eget tortor sodales elementum. Praesent neque eros, dignissim eu erat eget, cursus scelerisque elit. Vivamus at urna sed mauris accumsan rutrum placerat sit amet sem. Phasellus congue lorem ut faucibus porta. Nunc ac lacinia tellus, ac consectetur odio. Aliquam tincidunt augue sapien, nec porttitor augue volutpat sit amet. Nunc malesuada lacus tortor, at volutpat lacus tincidunt at. Aenean imperdiet massa sit amet libero consequat lobortis ac in mauris. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi scelerisque nulla ut nisl condimentum tempor.
-
+    
     Mauris quis turpis ut risus vehicula sollicitudin. Pellentesque scelerisque est ipsum, vitae vehicula nisi venenatis in. Morbi eu felis cursus, imperdiet dui a, fringilla lorem.`,
   },
   {
     title: "Hur gör jag en budget?",
     category: Category.har_jag_rad,
     answer: `Mauris porttitor velit tellus, quis aliquet ex blandit eget. In augue odio, blandit quis dui sed, posuere elementum dui. Nam aliquet urna eu lectus tincidunt, ac pretium justo condimentum. In hac habitasse platea dictumst.
-
+    
     Proin tortor nibh, feugiat consectetur maximus a, facilisis ut risus. Aliquam porta elementum nulla, quis cursus urna venenatis sit amet. Nulla facilisi. Donec enim velit, elementum vel gravida vitae, dignissim sit amet lectus. Cras viverra orci vitae imperdiet viverra. Nullam leo eros, finibus interdum tortor a, accumsan faucibus felis. Vivamus in augue tellus. Donec eget erat in diam pulvinar porttitor. Quisque eu gravida lectus.`,
   },
   {
     title: "Varför kan en budget vara bra att ha?",
     category: Category.har_jag_rad,
     answer: `Phasellus egestas ante id orci consectetur tempor. Duis purus nulla, pharetra tristique felis sit amet, luctus molestie odio. Vestibulum non elit erat. Integer ipsum nibh, elementum nec dolor sit amet, ultricies dictum mauris. Fusce vitae imperdiet lectus. Praesent mollis, neque in tempus varius, felis arcu elementum orci, sed tincidunt urna orci a dolor. Cras elementum nulla vel nisl efficitur cursus. Sed ut velit eu enim vestibulum mollis eu sed augue. Fusce nec sapien in eros laoreet aliquam id id dolor. Maecenas malesuada magna sit amet sollicitudin volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-
+    
     Nulla quis mauris et magna aliquam pharetra. Vivamus sit amet iaculis augue, et congue neque. Ut sodales massa vitae quam molestie, sit amet ultrices tellus rutrum.`,
   },
   {
     title: "Hur blir man köpkompis?",
     category: Category.bli_kop_kompis,
     answer: `Phasellus egestas ante id orci consectetur tempor. Duis purus nulla, pharetra tristique felis sit amet, luctus molestie odio. Vestibulum non elit erat. Integer ipsum nibh, elementum nec dolor sit amet, ultricies dictum mauris. Fusce vitae imperdiet lectus. Praesent mollis, neque in tempus varius, felis arcu elementum orci, sed tincidunt urna orci a dolor. Cras elementum nulla vel nisl efficitur cursus. Sed ut velit eu enim vestibulum mollis eu sed augue. Fusce nec sapien in eros laoreet aliquam id id dolor. Maecenas malesuada magna sit amet sollicitudin volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-
+    
     Nulla quis mauris et magna aliquam pharetra. Vivamus sit amet iaculis augue, et congue neque. Ut sodales massa vitae quam molestie, sit amet ultrices tellus rutrum.`,
   },
   {
     title: "Vad är skillnaden på att vara köpkompis och god man?",
     category: Category.bli_kop_kompis,
     answer: `Phasellus egestas ante id orci consectetur tempor. Duis purus nulla, pharetra tristique felis sit amet, luctus molestie odio. Vestibulum non elit erat. Integer ipsum nibh, elementum nec dolor sit amet, ultricies dictum mauris. Fusce vitae imperdiet lectus. Praesent mollis, neque in tempus varius, felis arcu elementum orci, sed tincidunt urna orci a dolor. Cras elementum nulla vel nisl efficitur cursus. Sed ut velit eu enim vestibulum mollis eu sed augue. Fusce nec sapien in eros laoreet aliquam id id dolor. Maecenas malesuada magna sit amet sollicitudin volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-
+    
     Nulla quis mauris et magna aliquam pharetra. Vivamus sit amet iaculis augue, et congue neque. Ut sodales massa vitae quam molestie, sit amet ultrices tellus rutrum.`,
   },
   {
     title: "Har jag ansvar för min kompis pengar?",
     category: Category.har_jag_rad,
     answer: `Phasellus egestas ante id orci consectetur tempor. Duis purus nulla, pharetra tristique felis sit amet, luctus molestie odio. Vestibulum non elit erat. Integer ipsum nibh, elementum nec dolor sit amet, ultricies dictum mauris. Fusce vitae imperdiet lectus. Praesent mollis, neque in tempus varius, felis arcu elementum orci, sed tincidunt urna orci a dolor. Cras elementum nulla vel nisl efficitur cursus. Sed ut velit eu enim vestibulum mollis eu sed augue. Fusce nec sapien in eros laoreet aliquam id id dolor. Maecenas malesuada magna sit amet sollicitudin volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-
+    
     Nulla quis mauris et magna aliquam pharetra. Vivamus sit amet iaculis augue, et congue neque. Ut sodales massa vitae quam molestie, sit amet ultrices tellus rutrum.`,
   },
   {
     title: "Hur gör jag en budget?",
     category: Category.ordlista,
     answer: `Phasellus egestas ante id orci consectetur tempor. Duis purus nulla, pharetra tristique felis sit amet, luctus molestie odio. Vestibulum non elit erat. Integer ipsum nibh, elementum nec dolor sit amet, ultricies dictum mauris. Fusce vitae imperdiet lectus. Praesent mollis, neque in tempus varius, felis arcu elementum orci, sed tincidunt urna orci a dolor. Cras elementum nulla vel nisl efficitur cursus. Sed ut velit eu enim vestibulum mollis eu sed augue. Fusce nec sapien in eros laoreet aliquam id id dolor. Maecenas malesuada magna sit amet sollicitudin volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-
+    
     Nulla quis mauris et magna aliquam pharetra. Vivamus sit amet iaculis augue, et congue neque. Ut sodales massa vitae quam molestie, sit amet ultrices tellus rutrum.`,
   },
   {
     title: "Varför kan en budget vara bra att ha?",
     category: Category.jag_angrar_mig,
     answer: `Phasellus egestas ante id orci consectetur tempor. Duis purus nulla, pharetra tristique felis sit amet, luctus molestie odio. Vestibulum non elit erat. Integer ipsum nibh, elementum nec dolor sit amet, ultricies dictum mauris. Fusce vitae imperdiet lectus. Praesent mollis, neque in tempus varius, felis arcu elementum orci, sed tincidunt urna orci a dolor. Cras elementum nulla vel nisl efficitur cursus. Sed ut velit eu enim vestibulum mollis eu sed augue. Fusce nec sapien in eros laoreet aliquam id id dolor. Maecenas malesuada magna sit amet sollicitudin volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-
+    
     Nulla quis mauris et magna aliquam pharetra. Vivamus sit amet iaculis augue, et congue neque. Ut sodales massa vitae quam molestie, sit amet ultrices tellus rutrum.`,
   },
 ];
@@ -174,6 +183,10 @@ const Index = () => {
     }
   }, [searchTerm, filter]);
 
+  const { theme } = useTheme();
+  const currentColor =
+    theme === "dark" ? SVGIconColors.dark : SVGIconColors.light;
+
   return (
     <>
       <Layout>
@@ -200,7 +213,7 @@ const Index = () => {
             <Container>
               <div className="max-w-screen-lg lg:mx-auto">
                 <p className="font-semibold py-1 text-base uppercase ml-5">
-                  Sortera efter
+                  Filtrera efter
                 </p>
                 <div className="max-w-xl flex items-center pb-4">
                   <Select
@@ -210,6 +223,14 @@ const Index = () => {
                     components={{
                       IndicatorSeparator: () => null,
                     }}
+                    theme={(theme) => ({
+                      ...theme,
+                      colors: {
+                        ...theme.colors,
+                        primary: "#BFBEE0",
+                        primary25: "#d9d8ec",
+                      },
+                    })}
                     value={filter}
                     onChange={(item) => {
                       if (item) {
@@ -233,8 +254,8 @@ const Index = () => {
                   </p>
                   <Accordion options={searchResults} />
                 </div>
-                <div className="flex flex-col items-center py-4">
-                  <p className="py-2">Hittade du inte svaret du sökte?</p>
+                <div className="flex flex-col items-center py-8">
+                  <p className="py-8">Hittade du inte svaret du sökte?</p>
                   <RoundButton
                     text="Ställ din fråga"
                     onClick={() => setShowModal(true)}
@@ -245,16 +266,16 @@ const Index = () => {
           </section>
           <section className="py-36">
             <Container>
-              <div className="flex flex-col sm:flex-row justify-evenly">
+              <div className="flex flex-col sm:flex-row sm:justify-center sm:space-x-24 sm:space-y-0 space-y-8">
                 <IconLink
                   link="/sa_funkar_det"
-                  icon={<Tag />}
+                  icon={<Tag fill={currentColor} />}
                   title="Hur gör man egentligen?"
                   text="Kolla in Så funkar det"
                 />
                 <IconLink
                   link="/bli_kop_kompis"
-                  icon={<Friend />}
+                  icon={<Friend fill={currentColor} />}
                   title="Bli köpkompis"
                   text="Enkelt & smart"
                 />
@@ -272,33 +293,15 @@ const Index = () => {
             {!modalSubmitted ? (
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <div className="flex flex-col space-y-5">
-                  <label
-                    htmlFor="name"
-                    className={`text-2xl pl-5 ${
-                      errors.name ? "text-red-500" : null
-                    }`}
-                  >
-                    Skriv ditt namn
-                  </label>
-
                   <input
                     name="name"
                     type="text"
-                    placeholder="Namn"
+                    placeholder="Skriv in ditt namn"
                     className="p-3 pl-5 rounded-full text-2xl"
                     ref={register({
                       required: "*",
                     })}
                   />
-                  <label
-                    htmlFor="email"
-                    className={`text-2xl pl-5 ${
-                      errors.email ? "text-red-500" : null
-                    }`}
-                  >
-                    Skriv din email-adress
-                  </label>
-
                   <input
                     name="email"
                     type="email"
@@ -308,7 +311,7 @@ const Index = () => {
                       required: "*",
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                        message: "Enter a valid e-mail address",
+                        message: "Skriv in en giltig e-mailadress",
                       },
                     })}
                   />
@@ -317,14 +320,6 @@ const Index = () => {
                       {errors.email.message}
                     </p>
                   ) : null}
-                  <label
-                    htmlFor="question"
-                    className={`text-2xl pl-5 ${
-                      errors.question ? "text-red-500" : null
-                    }`}
-                  >
-                    Skriv din fråga
-                  </label>
                   <textarea
                     className="resize-none border rounded-3xl p-3 pl-5 text-2xl"
                     name="question"
@@ -336,7 +331,7 @@ const Index = () => {
                   ></textarea>
                   <div className="justify-center flex py-4">
                     <button
-                      className="bg-accent-2 text-white font-semibold text-l px-14 py-3 rounded-full hover:underline "
+                      className="bg-accent-2 dark:bg-accent-3 text-white dark:text-text-color font-semibold text-l px-14 py-3 rounded-full hover:underline "
                       type="submit"
                     >
                       Skicka in frågan

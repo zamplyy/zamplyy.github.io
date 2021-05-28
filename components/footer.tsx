@@ -4,8 +4,14 @@ import Envelope from "../public/assets/icons/envelope.svg";
 import Facebook from "../public/assets/icons/fb.svg";
 import AppStore from "../public/assets/icons/appstore.svg";
 import GooglePlay from "../public/assets/icons/googleplay.svg";
+import { useTheme } from "next-themes";
+import { SVGIconColors } from "../utils/constants";
 
 const Footer = () => {
+  const { theme } = useTheme();
+  const currentColor =
+    theme === "dark" ? SVGIconColors.dark : SVGIconColors.light;
+
   return (
     <footer className="bg-accent-2">
       <Container>
@@ -16,7 +22,7 @@ const Footer = () => {
             </h3>
             <div className="flex sm:space-x-4 space-x-1">
               <a href="https://play.google.com/store" target="_blank">
-                <GooglePlay />
+                <GooglePlay fill={currentColor} />
               </a>
               <a href="https://www.apple.com/se/ios/app-store/" target="_blank">
                 <AppStore />
@@ -39,7 +45,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          <div className="flex justify-center flex-grow items-end md:justify-end pt-5 ">
+          <div className="flex justify-center flex-grow items-end md:justify-end pb-4 pt-4">
             <a className="pr-4" href="https://www.pts.se/" target="_blank">
               <img src={"/assets/pts-white.png"} />
             </a>

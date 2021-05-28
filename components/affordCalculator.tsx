@@ -122,7 +122,7 @@ const AffordCalculator = (props: Props) => {
           </div>
           <div className="justify-center flex">
             <button
-              className="bg-accent-2 text-white font-semibold text-l px-14 py-3 rounded-full hover:underline "
+              className="bg-accent-2 dark:bg-accent-3 text-white dark:text-text-color font-semibold text-l px-14 py-3 rounded-full hover:underline "
               type="submit"
             >
               Räkna ut
@@ -150,7 +150,7 @@ const AffordCalculator = (props: Props) => {
             <h1 className="py-3">{moneyLeft + " KR"}</h1>
           </div>
           <button
-            className="bg-accent-2 text-white font-semibold text-l py-3 rounded-full hover:underline "
+            className="bg-accent-2 dark:bg-accent-3 text-white dark:text-text-color font-semibold text-l py-3 rounded-full hover:underline "
             onClick={onBack}
           >
             Stäng

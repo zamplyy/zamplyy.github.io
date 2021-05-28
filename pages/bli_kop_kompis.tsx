@@ -4,11 +4,16 @@ import Head from "next/head";
 import Header from "../components/header";
 import PictureRow from "../components/picture-row";
 import { IconLink } from "../components/IconLink";
-
 import Spel from "../public/assets/icons/spel.svg";
 import Blogg from "../public/assets/icons/blogg.svg";
+import { useTheme } from "next-themes";
+import { SVGIconColors } from "../utils/constants";
 
 const Index = () => {
+  const { theme } = useTheme();
+  const currentColor =
+    theme === "dark" ? SVGIconColors.dark : SVGIconColors.light;
+
   return (
     <>
       <Layout>
@@ -78,18 +83,18 @@ const Index = () => {
           </section>
           <section className="py-36">
             <Container>
-              <div className="flex flex-col sm:flex-row justify-evenly">
+              <div className="flex flex-col sm:flex-row sm:justify-center sm:space-x-24 sm:space-y-0 space-y-8">
                 <IconLink
                   title="6 enkla spartips för alla"
                   text="Läs Cissis blogginlägg nu"
                   link="/blogg"
-                  icon={<Blogg />}
+                  icon={<Blogg fill={currentColor} />}
                 />
                 <IconLink
                   link="/spel"
                   title="Testa spelet"
                   text="Vad har du råd med?"
-                  icon={<Spel />}
+                  icon={<Spel fill={currentColor} />}
                 />
               </div>
             </Container>

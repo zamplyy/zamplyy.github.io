@@ -267,7 +267,7 @@ export function Game() {
           id="question_item"
         />
         <div className="col-span-2 flex justify-center relative">
-          <div className="p-4 bg-white absolute rounded-xl -top-28 left-4 -right-20">
+          <div className="p-4 bg-white dark:bg-accent-2 absolute rounded-xl -top-28 left-4 -right-20">
             <p className="text-base">{BourseTalking()}</p>
           </div>
           <div className="flex">{Bourse()}</div>
@@ -288,6 +288,7 @@ export function Game() {
         />
         <div className="h-10">
           <RoundButton
+            color={"bg-accent-2"}
             text={bourseState !== BourseState.happy ? "KÖP" : "NÄSTA"}
             onClick={() => {
               if (bourseState === BourseState.happy) {
@@ -333,15 +334,8 @@ type ItemContainerProps = {
   ) => void;
 };
 export function ItemContainerView(props: ItemContainerProps) {
-  const {
-    item,
-    showPrice,
-    noDrag,
-    noDrop,
-    dragHere,
-    id,
-    handleDroppedItem,
-  } = props;
+  const { item, showPrice, noDrag, noDrop, dragHere, id, handleDroppedItem } =
+    props;
 
   const [{ isOver, canDrop }, drop] = useDrop(
     () => ({
@@ -371,8 +365,8 @@ export function ItemContainerView(props: ItemContainerProps) {
         ref={drop}
         className={`h-28 justify-center flex border-4 rounded-xl ${
           isOver && canDrop
-            ? "bg-accent-2  border-accent-3"
-            : "bg-accent-3  border-accent-2"
+            ? "bg-accent-2  border-accent-3 dark:bg-accent-3 dark:border-accent-2"
+            : "bg-accent-3  border-accent-2 dark:bg-accent-2 dark:border-accent-3"
         }`}
       >
         {item ? (
@@ -388,7 +382,7 @@ export function ItemContainerView(props: ItemContainerProps) {
         ) : null}
       </div>
       {showPrice && item ? (
-        <div className="border-4 rounded-xl bg-accent-3 mt-2 border-accent-2">
+        <div className="border-4 rounded-xl bg-accent-3 mt-2 border-accent-2  dark:bg-accent-2 dark:border-accent-3 ">
           <p>{`${item?.price} kr`}</p>
         </div>
       ) : null}

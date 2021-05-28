@@ -10,9 +10,14 @@ import { IconLink } from "../components/IconLink";
 import Tag from "../public/assets/icons/tag.svg";
 import Regret from "../public/assets/icons/regret.svg";
 import useWindowSize from "../utils/useWindowSize";
+import { useTheme } from "next-themes";
+import { SVGIconColors } from "../utils/constants";
 
 const Index = () => {
   const { width } = useWindowSize();
+  const { theme } = useTheme();
+  const currentColor =
+    theme === "dark" ? SVGIconColors.dark : SVGIconColors.light;
 
   const breakpoint = width && width < 490;
 
@@ -78,16 +83,16 @@ const Index = () => {
           </section>
           <section className="py-36">
             <Container>
-              <div className="flex flex-col sm:flex-row justify-evenly">
+              <div className="flex flex-col sm:flex-row sm:justify-center sm:space-x-24 sm:space-y-0 space-y-8">
                 <IconLink
                   text="Hur gör jag nu"
-                  icon={<Regret />}
+                  icon={<Regret fill={currentColor} />}
                   link="/jag_angrar_mig"
                   title="jag ångrar mig"
                 />
                 <IconLink
                   link="/sa_funkar_det"
-                  icon={<Tag />}
+                  icon={<Tag fill={currentColor} />}
                   title="Hur gör man egentligen?"
                   text="Kolla in Så funkar det"
                 />

@@ -18,6 +18,8 @@ import UserIcon from "../public/assets/icons/user.svg";
 import Tag from "../public/assets/icons/tag.svg";
 import Question from "../public/assets/icons/question.svg";
 import Close from "../public/assets/icons/close-small.svg";
+import { useTheme } from "next-themes";
+import { SVGIconColors } from "../utils/constants";
 
 type Props = {
   allPostsData: PostsWithId;
@@ -75,6 +77,10 @@ const Blogg = (props: Props) => {
     tags.push(tag);
     setFilterTags(tags);
   };
+
+  const { theme } = useTheme();
+  const currentColor =
+    theme === "dark" ? SVGIconColors.dark : SVGIconColors.light;
 
   return (
     <>
@@ -195,16 +201,16 @@ const Blogg = (props: Props) => {
           </section>
           <section className="py-36">
             <Container>
-              <div className="flex flex-col sm:flex-row justify-evenly">
+              <div className="flex flex-col sm:flex-row sm:justify-center sm:space-x-24 sm:space-y-0 space-y-8">
                 <IconLink
                   text="Det finns inga dumma frågor"
-                  icon={<Question />}
+                  icon={<Question fill={currentColor} />}
                   link="/fragor_och_svar"
                   title="Frågor & svar"
                 />
                 <IconLink
                   link="/sa_funkar_det"
-                  icon={<Tag />}
+                  icon={<Tag fill={currentColor} />}
                   title="Hur gör man egentligen?"
                   text="Kolla in Så funkar det"
                 />

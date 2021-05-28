@@ -21,10 +21,10 @@ const AccordionItem = ({
   index,
 }: AccordionItemProps) => {
   return (
-    <motion.li className="rounded-3xl bg-white py-2 md:py-4 md:px-8 px-2  my-2 cursor-pointer">
+    <motion.li className="rounded-3xl bg-white text-white dark:text-text-color py-2 md:py-4 md:px-8 px-2  my-2 cursor-pointer">
       <div className="flex justify-between" onClick={() => handleClick(index)}>
         <button>
-          <p>{option.title}</p>
+          <p className="text-text-color dark:text-text-color">{option.title}</p>
         </button>
         <motion.button animate={{ rotate: isActive ? 180 : 0 }}>
           <Chevron />

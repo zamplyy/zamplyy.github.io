@@ -5,13 +5,16 @@ type Props = {
   text: string;
   onClick: any;
   disabled?: boolean;
+  color?: string;
 };
 
 export function RoundButton(props: Props) {
-  const { icon, text, onClick, disabled } = props;
+  const { icon, text, onClick, disabled, color } = props;
   return (
     <motion.button
-      className="py-4 bg-accent-2 rounded-full px-10 my-1"
+      className={`py-4 rounded-full px-10 my-1 ${
+        color || "bg-accent-2 dark:bg-accent-3"
+      } `}
       onClick={onClick || null}
       whileHover={disabled ? {} : { scale: 1.02 }}
       whileTap={disabled ? {} : { scale: 0.98 }}
@@ -23,7 +26,7 @@ export function RoundButton(props: Props) {
         }`}
       >
         {icon ? <div className="pr-3">{icon}</div> : null}
-        <p className="text-white text-xl">{text}</p>
+        <p className="text-white text-xl dark:text-text-color">{text}</p>
       </div>
     </motion.button>
   );
