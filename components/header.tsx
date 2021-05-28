@@ -78,11 +78,11 @@ const Header = (props: Props) => {
         {pages.map((page) => (
           <Link href={page.link} key={page.link}>
             <a
-              className={`hover:border-opacity-100 uppercase text-lg py-2 px-4 font-jost font-normal  ${
+              className={`hover:border-opacity-100 uppercase text-lg py-2 px-4 font-jost font-normal ${
                 isActive(page.link) ? "bg-white" : "bg-accent-1"
               }`}
             >
-              {page.title}
+              <span className="text-text-color">{page.title}</span>
             </a>
           </Link>
         ))}
