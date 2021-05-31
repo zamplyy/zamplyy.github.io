@@ -104,6 +104,9 @@ const Blogg = (props: Props) => {
                     placeholder="Sök"
                     value={searchTerm}
                     onChange={handleChange}
+                    style={{
+                      color: "#343434",
+                    }}
                     className="bg-white border-4 border-gray-400 rounded-full px-5 py-4 flex-grow text-lg"
                   />
                 </div>

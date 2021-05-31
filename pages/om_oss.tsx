@@ -7,11 +7,11 @@ import { Quote } from ".";
 
 const quotes: Quote[] = [
   {
-    image: "",
+    image: "bourse_clueless.svg",
     quote: "Nu behöver jag inte ringa till mamma för att kolla om jag har råd!",
   },
   {
-    image: "",
+    image: "sitting_left.svg",
     quote: "Här är ett till bra quote som vi kan använda oss av!",
   },
 ];

@@ -16,8 +16,12 @@ const PictureRow = ({ imageUrl, text, title, imageIsLeft }: Props) => {
       } `}
     >
       <div className="flex-1 max-w-xl mr-4 mb-4 sm:mb-0">
-        <h2 className="font-bold text-3xl">{title}</h2>
-        <p className="text-2xl font-light">{text}</p>
+        <h2 className="font-bold text-3xl">
+          <span className="text-text-color">{title}</span>
+        </h2>
+        <p className="text-2xl font-light ">
+          <span className="text-text-color">{text}</span>
+        </p>
       </div>
       <div className="mb-5">
         <Card width={300} height={300}>

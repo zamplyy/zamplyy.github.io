@@ -145,9 +145,15 @@ const AffordCalculator = (props: Props) => {
             <img src={calculatedPage?.icon}></img>
           </div>
           <div className="text-center space-y-3 py-5">
-            <h3 className="font-bold text-2xl">{calculatedPage?.title}</h3>
-            <p>{calculatedPage?.text}</p>
-            <h1 className="py-3">{moneyLeft + " KR"}</h1>
+            <h3 className="font-bold text-2xl text-text-color">
+              <span className="text-text-color">{calculatedPage?.title}</span>
+            </h3>
+            <p>
+              <span className="text-text-color">{calculatedPage?.text}</span>
+            </p>
+            <h1 className="py-4">
+              <span className="text-text-color">{moneyLeft + " KR"}</span>
+            </h1>
           </div>
           <button
             className="bg-accent-2 dark:bg-accent-3 text-white dark:text-text-color font-semibold text-l py-3 rounded-full hover:underline "

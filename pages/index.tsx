@@ -14,11 +14,11 @@ export type Quote = {
 };
 const quotes: Quote[] = [
   {
-    image: "",
+    image: "sitting_left.svg",
     quote: "Nu behöver jag inte ringa till mamma för att kolla om jag har råd!",
   },
   {
-    image: "",
+    image: "bourse-tilted.svg",
     quote: "Här är ett till bra quote som vi kan använda oss av!",
   },
 ];

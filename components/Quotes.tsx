@@ -103,34 +103,44 @@ export function Quotes(props: Props) {
             key={index}
             className="flex flex-col md:flex-row items-center space-y-12 pt-12 pb-20 md:justify-center md:space-x-10 bg-accent-1 md:pt-24 md:pb-36"
           >
-            <Card
-              width={breakpoint ? 200 : 350}
-              height={breakpoint ? 200 : 350}
-            >
-              <div className="p-5 flex flex-col items-center justify-center flex-grow">
-                <img
-                  src={`/assets/money${index}.jpg`}
-                  alt={"Image from quote " + index}
-                />
-              </div>
-            </Card>
-            <Card
-              width={breakpoint ? 210 : 420}
-              height={breakpoint ? 240 : 230}
-            >
-              <div className="flex flex-col flex-grow relative">
-                <p className="italic font-semibold text-9xl text-left pl-5">
-                  “
-                </p>
-                <p
-                  className={`italic font-semibold text-2xl absolute text-center p-3  ${
-                    breakpoint ? "top-10" : "top-16"
-                  }`}
+            <div className="relative">
+              <div className="hidden md:block md:mr-52">
+                <Card
+                  width={breakpoint ? 200 : 350}
+                  height={breakpoint ? 200 : 350}
                 >
-                  {quote.quote}
-                </p>
+                  <div className=" ">
+                    <img
+                      className="object-cover "
+                      style={{
+                        height: breakpoint ? 200 : 350,
+                      }}
+                      src={`/assets/${quote.image}`}
+                      alt={"Image from quote " + index}
+                    />
+                  </div>
+                </Card>
               </div>
-            </Card>
+              <div className="relative md:absolute z-20 md:left-44 md:top-12">
+                <Card
+                  width={breakpoint ? 210 : 420}
+                  height={breakpoint ? 240 : 230}
+                >
+                  <div className="flex flex-col flex-grow relative">
+                    <p className="italic font-semibold text-9xl text-left pl-5">
+                      “
+                    </p>
+                    <p
+                      className={`italic font-semibold text-2xl absolute text-center p-3  ${
+                        breakpoint ? "top-10" : "top-16"
+                      }`}
+                    >
+                      {quote.quote}
+                    </p>
+                  </div>
+                </Card>
+              </div>
+            </div>
           </div>
         );
       })}

@@ -243,6 +243,9 @@ const Index = () => {
                   <input
                     type="text"
                     placeholder="Sök"
+                    style={{
+                      color: "#343434",
+                    }}
                     value={searchTerm}
                     onChange={handleChange}
                     className="bg-white border-4 border-gray-400 rounded-full px-5 py-5 flex-grow text-lg"

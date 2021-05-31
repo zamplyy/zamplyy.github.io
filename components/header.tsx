@@ -20,7 +20,8 @@ const Header = (props: Props) => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const currentColor = theme === "light" ? "#343434" : "#bababa";
+  const currentLogoColor = theme === "light" ? "#343434" : "#bababa";
+  const currentHamburgerColor = theme === "light" ? "#343434" : "#ffffff";
 
   const pages = [
     { link: "/", title: "Hem" },
@@ -112,11 +113,11 @@ const Header = (props: Props) => {
           }}
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
-          <DarkMode fill={currentColor} />
+          <DarkMode fill={currentLogoColor} />
         </motion.div>
         {breakpoint ? (
           <div className="pr-2" onClick={() => setIsOpen(true)}>
-            <Hamburger />
+            <Hamburger stroke={currentHamburgerColor} />
           </div>
         ) : null}
         {breakpoint ? smallMenu() : bigMenu()}

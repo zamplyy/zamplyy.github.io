@@ -13,6 +13,20 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { useTheme } from "next-themes";
 import { SVGIconColors } from "../utils/constants";
 
+import { Quotes } from "../components/Quotes";
+import { Quote } from ".";
+
+const quotes: Quote[] = [
+  {
+    image: "money0.jpg",
+    quote: "Bästa sättet att lära sig något nytt är att ha kul!",
+  },
+  {
+    image: "money1.jpg",
+    quote: "Det är coolt att ha koll!",
+  },
+];
+
 const Index = () => {
   const { theme } = useTheme();
   const currentColor =
@@ -51,6 +65,9 @@ const Index = () => {
                   För att spela spelet öppna hemsidan på en större skärm!
                 </p>
               </Container>
+            </section>
+            <section className="pt-32">
+              <Quotes quotes={quotes} />
             </section>
             <section className="py-36">
               <Container>
