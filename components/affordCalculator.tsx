@@ -155,12 +155,14 @@ const AffordCalculator = (props: Props) => {
               <span className="text-text-color">{moneyLeft + " KR"}</span>
             </h1>
           </div>
-          <button
-            className="bg-accent-2 dark:bg-accent-3 text-white dark:text-text-color font-semibold text-l py-3 rounded-full hover:underline "
-            onClick={onBack}
-          >
-            Stäng
-          </button>
+          <div className="m-auto">
+            <button
+              className="bg-accent-2 dark:bg-accent-3 text-white dark:text-text-color font-semibold text-l  px-14 py-3 rounded-full hover:underline "
+              onClick={onBack}
+            >
+              Stäng
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -168,7 +170,10 @@ const AffordCalculator = (props: Props) => {
 
   return (
     <div className="flex justify-center mb-14">
-      <Card height={breakpoint ? 500 : 500} width={breakpoint ? 300 : 500}>
+      <Card
+        height={breakpoint ? 500 : page === Page.input ? 500 : 530}
+        width={breakpoint ? 300 : 500}
+      >
         {page === Page.input ? renderInputPage() : renderCalculatedPage()}
       </Card>
     </div>

@@ -1,12 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "../utils/constants";
-import BourseHappy from "../public/assets/bourse_happy.svg";
-import BourseSad from "../public/assets/bourse_sad.svg";
-import BourseClueless from "../public/assets/bourse_clueless.svg";
 import { RoundButton } from "./roundButton";
-import { AnimatePresence, motion } from "framer-motion";
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 enum Comparison {
   equal = "equal",
@@ -234,14 +230,14 @@ export function Game() {
 
   const buyDisabled = !firstSelectedItem || !secondSelectedItem;
 
-  const Bourse = () => {
+  const bourseImage = () => {
     switch (bourseState) {
       case BourseState.happy:
-        return <BourseHappy />;
+        return "bourse_happy.svg";
       case BourseState.sad:
-        return <BourseSad />;
+        return "bourse_sad.svg";
       case BourseState.clueless:
-        return <BourseClueless />;
+        return "bourse_clueless.svg";
     }
   };
 
@@ -267,10 +263,12 @@ export function Game() {
           id="question_item"
         />
         <div className="col-span-2 flex justify-center relative">
-          <div className="p-4 bg-white dark:bg-accent-2 absolute rounded-xl -top-28 left-4 -right-20">
+          <div className="p-4 bg-accent-3 dark:bg-accent-2 absolute rounded-xl -top-28 left-4 -right-20">
             <p className="text-base">{BourseTalking()}</p>
           </div>
-          <div className="flex">{Bourse()}</div>
+          <div className="flex object-contain h-36 justify-center">
+            <img src={`assets/${bourseImage()}`}></img>
+          </div>
         </div>
         <ItemContainerView
           item={firstSelectedItem}
@@ -360,7 +358,11 @@ export function ItemContainerView(props: ItemContainerProps) {
   );
 
   return (
-    <div>
+    <div
+    // className={`${
+    //   dragHere ? "border-4 border-dashed border-accent-2 rounded-lg" : ""
+    // }`}
+    >
       <div
         ref={drop}
         className={`h-28 justify-center flex border-4 rounded-xl ${

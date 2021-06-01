@@ -2,18 +2,38 @@ import Container from "../../components/container";
 import Layout from "../../components/layout";
 import Head from "next/head";
 import Header from "../../components/header";
+import Back from "../../public/assets/icons/back.svg";
+import UserIcon from "../../public/assets/icons/user.svg";
+import { dayAndMonthFromDate } from "../../utils/dates";
+
 import { GetStaticPaths, GetStaticProps } from "next";
-import { getAllPostIds, getPostData } from "../../utils/posts";
+import {
+  Category,
+  getAllPostIds,
+  getAllUniquePostCategories,
+  getPostData,
+  getSortedPostsData,
+  PostWithContent,
+} from "../../utils/posts";
+import React from "react";
+import Link from "next/link";
 
 const Post = ({
   postData,
+  uniquePostCategories,
 }: {
-  postData: {
-    title: string;
-    date: string;
-    contentHtml: string;
-  };
+  postData: PostWithContent;
+  uniquePostCategories: Category[];
 }) => {
+  console.log("post", postData);
+  const getCategoryColor = (category: string) => {
+    const color = uniquePostCategories.find(
+      (cat) => cat.name === category
+    )?.color;
+    if (color) return color;
+    return "#ff0000";
+  };
+
   return (
     <>
       <Layout>
@@ -25,9 +45,35 @@ const Post = ({
           <section className="">
             <Container>
               <div className="max-w-screen-lg lg:mx-auto">
-                <h1 className="">{postData.title}</h1>
-                <h2>{postData.date}</h2>
+                <Link href="/blogg">
+                  <a className="flex space-x-4 items-center">
+                    <Back />
+                    <span className="font-bold text-lg hover:underline">
+                      Tillbaka
+                    </span>
+                  </a>
+                </Link>
                 <div
+                  className="h-72 my-10"
+                  style={{
+                    background: `${getCategoryColor(postData.category)} url(${
+                      postData.image
+                    })`,
+                  }}
+                ></div>
+                <h1 className="">{postData.title}</h1>
+                <div className="flex py-8">
+                  <UserIcon />
+                  <div className=" pl-10">
+                    <p>{postData.author}</p>
+                    <div className="flex font-semibold text-base">
+                      {dayAndMonthFromDate(postData.date)}
+                      <span className="pl-5">{postData.readingTime}</span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="pb-20"
                   dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
                 />
               </div>
@@ -49,9 +95,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postData = await getPostData(params?.id as string);
+  const uniquePostCategories = getAllUniquePostCategories(getSortedPostsData());
   return {
     props: {
       postData,
+      uniquePostCategories,
     },
   };
 };

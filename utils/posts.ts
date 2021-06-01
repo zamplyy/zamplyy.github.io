@@ -3,9 +3,6 @@ import path from "path";
 import matter from "gray-matter";
 import remark from "remark";
 import html from "remark-html";
-
-// const readingTime = require('reading-time');
-
 import readingTime from "reading-time";
 
 export type Category = {
@@ -17,7 +14,7 @@ type Post = {
   date: number;
   title: string;
   author: string;
-  image: string;
+  image: string | null;
   category: string;
   readingTime: string;
 };
@@ -25,7 +22,7 @@ type Post = {
 type PostWithId = Post & {
   id: string;
 };
-type PostWithContent = Post & {
+export type PostWithContent = Post & {
   id: string;
   contentHtml: string;
 };
@@ -94,6 +91,10 @@ export async function getPostData(id: string): Promise<PostWithContent> {
   // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);
 
+  const minutesRead = `${Math.round(
+    readingTime(matterResult.content).minutes
+  )} min läsning`;
+
   // Use remark to convert markdown into HTML string
   const processedContent = await remark()
     .use(html)
@@ -105,5 +106,6 @@ export async function getPostData(id: string): Promise<PostWithContent> {
     id,
     contentHtml,
     ...(matterResult.data as Post),
+    readingTime: minutesRead,
   };
 }

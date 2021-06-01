@@ -3,6 +3,7 @@ title: "Så blir du mer självständig med hjälp av börsen"
 date: "2021-02-09"
 author: "Joar Karlsson"
 category: "spartips"
+image: "/assets/blog/blogg-joar.png"
 ---
 
 ## Tumidam ignarus

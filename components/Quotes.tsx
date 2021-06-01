@@ -111,9 +111,10 @@ export function Quotes(props: Props) {
                 >
                   <div className=" ">
                     <img
-                      className="object-cover "
+                      className="object-contain"
                       style={{
                         height: breakpoint ? 200 : 350,
+                        width: breakpoint ? 200 : 350,
                       }}
                       src={`/assets/${quote.image}`}
                       alt={"Image from quote " + index}
@@ -121,7 +122,7 @@ export function Quotes(props: Props) {
                   </div>
                 </Card>
               </div>
-              <div className="relative md:absolute z-20 md:left-44 md:top-12">
+              <div className="relative md:absolute z-20 md:left-64 md:top-12">
                 <Card
                   width={breakpoint ? 210 : 420}
                   height={breakpoint ? 240 : 230}

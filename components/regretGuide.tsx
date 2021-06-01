@@ -6,6 +6,9 @@ import Close from "../public/assets/icons/close.svg";
 import Drinks from "../public/assets/icons/dryck.svg";
 import Clothes from "../public/assets/icons/klader.svg";
 import Other from "../public/assets/icons/annat.svg";
+import Redo from "../public/assets/icons/redo.svg";
+import Download from "../public/assets/icons/download.svg";
+import Checkmark from "../public/assets/icons/cloud_checkmark.svg";
 import useWindowSize from "../utils/useWindowSize";
 
 type Props = {};
@@ -182,15 +185,30 @@ const RegretGuide = (props: Props) => {
             till butiken & be om att få lämna tillbaka det du köpt.
           </p>
         </div>
-        <div className="flex-col flex self-center">
+        <div className="flex-col flex self-center relative ">
+          <RoundButton
+            onClick={() => setPage(Page.start)}
+            text="Spara ditt resultat"
+            icon={<Download />}
+          />
           <RoundButton
             onClick={() => setPage(Page.start)}
             text="Tack, då vet jag!"
+            icon={<Checkmark />}
           />
           <RoundButton
             onClick={startQuiz}
             text="Jag vill göra om från början"
+            icon={<Redo />}
           />
+          <div
+            className="absolute -right-60 -top-20"
+            style={{
+              right: -227,
+            }}
+          >
+            <img src="/assets/bourse_content.svg"></img>
+          </div>
         </div>
       </div>
     );
@@ -207,10 +225,21 @@ const RegretGuide = (props: Props) => {
     }
   };
 
+  const getPageHeight = () => {
+    switch (page) {
+      case Page.start:
+        return 425;
+      case Page.quiz:
+        return 425;
+      case Page.results:
+        return 540;
+    }
+  };
+
   return (
     <div className="flex justify-center my-14">
       <Card
-        height={page === Page.start ? 275 : 425}
+        height={page === Page.start ? 275 : getPageHeight()}
         width={breakpoint ? 350 : 820}
       >
         {getPage()}
