@@ -5,7 +5,6 @@ import Header from "../../components/header";
 import Back from "../../public/assets/icons/back.svg";
 import UserIcon from "../../public/assets/icons/user.svg";
 import { dayAndMonthFromDate } from "../../utils/dates";
-
 import { GetStaticPaths, GetStaticProps } from "next";
 import {
   Category,
@@ -17,6 +16,8 @@ import {
 } from "../../utils/posts";
 import React from "react";
 import Link from "next/link";
+import { SVGIconColors } from "../../utils/constants";
+import { useTheme } from "next-themes";
 
 const Post = ({
   postData,
@@ -25,7 +26,9 @@ const Post = ({
   postData: PostWithContent;
   uniquePostCategories: Category[];
 }) => {
-  console.log("post", postData);
+  const { theme } = useTheme();
+  const currentColor = theme === "dark" ? SVGIconColors.dark : "#343434";
+
   const getCategoryColor = (category: string) => {
     const color = uniquePostCategories.find(
       (cat) => cat.name === category
@@ -47,23 +50,24 @@ const Post = ({
               <div className="max-w-screen-lg lg:mx-auto">
                 <Link href="/blogg">
                   <a className="flex space-x-4 items-center">
-                    <Back />
+                    <Back stroke={currentColor} />
                     <span className="font-bold text-lg hover:underline">
                       Tillbaka
                     </span>
                   </a>
                 </Link>
                 <div
-                  className="h-72 my-10"
+                  className="h-36 sm:h-72 my-10"
                   style={{
                     background: `${getCategoryColor(postData.category)} url(${
                       postData.image
                     })`,
+                    backgroundSize: "cover",
                   }}
                 ></div>
-                <h1 className="">{postData.title}</h1>
+                <h1 className="text-4xl sm:text-5xl">{postData.title}</h1>
                 <div className="flex py-8">
-                  <UserIcon />
+                  <UserIcon fill={currentColor} />
                   <div className=" pl-10">
                     <p>{postData.author}</p>
                     <div className="flex font-semibold text-base">

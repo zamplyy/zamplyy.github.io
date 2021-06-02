@@ -4,6 +4,7 @@ import Head from "next/head";
 import Header from "../components/header";
 import { Quotes } from "../components/Quotes";
 import { Quote } from ".";
+import { useTheme } from "next-themes";
 
 const quotes: Quote[] = [
   {
@@ -17,6 +18,9 @@ const quotes: Quote[] = [
 ];
 
 const Index = () => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   return (
     <>
       <Layout>
@@ -73,21 +77,37 @@ const Index = () => {
                 href="https://www.pts.se/"
                 target="_blank"
               >
-                <img src={"/assets/pts-black.png"} />
+                <img
+                  src={
+                    isDark ? "/assets/pts_dark.png" : "/assets/pts-black.png"
+                  }
+                />
               </a>
               <a
                 className="py-6 sm:-mb-10 md:-mb-14 px-6"
                 href="https://www.tietoevry.com/"
                 target="_blank"
               >
-                <img src={"/assets/tietoevry-black.png"} />
+                <img
+                  src={
+                    isDark
+                      ? "/assets/tietoevry_dark.png"
+                      : "/assets/tietoevry-black.png"
+                  }
+                />
               </a>
               <a
                 className="pl-6 mb-1 py-6"
                 href="https://www.lansstyrelsen.se/orebro.html"
                 target="_blank"
               >
-                <img src={"/assets/lansstyrelsen-big.png"} />
+                <img
+                  src={
+                    isDark
+                      ? "/assets/lansstyrelsen_dark.png"
+                      : "/assets/lansstyrelsen-big.png"
+                  }
+                />
               </a>
             </div>
           </section>

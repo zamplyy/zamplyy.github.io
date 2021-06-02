@@ -81,6 +81,7 @@ const Blogg = (props: Props) => {
   const { theme } = useTheme();
   const currentColor =
     theme === "dark" ? SVGIconColors.dark : SVGIconColors.light;
+  const userIconColor = theme === "dark" ? SVGIconColors.dark : "#343434";
 
   return (
     <>
@@ -144,7 +145,7 @@ const Blogg = (props: Props) => {
                               ></div>
                             </div>
                             <div className="pt-2 pr-2 sm:px-8">
-                              <UserIcon />
+                              <UserIcon fill={userIconColor} />
                             </div>
                             <div className="pt-1 flex-grow">
                               <div className="max-w-sm">

@@ -149,7 +149,7 @@ const RegretGuide = (props: Props) => {
       <div className="flex flex-row flex-grow py-12">
         <div className="mx-10 pt-2 flex-shrink-0">
           <button onClick={previousQuestion}>
-            <Back />
+            <Back stroke="#343434" />
           </button>
         </div>
 

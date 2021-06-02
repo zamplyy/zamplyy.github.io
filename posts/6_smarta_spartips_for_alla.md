@@ -13,22 +13,8 @@ dextra sustinet comitantibus neque. Descenderat sedes: _aevo pectus_ turbata
 subita tacito. Aurea exire adfata cum, o frustra equa caesosque! Neque dum nata
 ferre iterum lacerto in ipse est excusantia scire amplexus virgo.
 
-1. Facunde illo angustum
-2. Et iactas ipse nec reddere iussae gemitu
-3. Adulantes meum faeno silvis concurrere sidere caenumque
-4. Sulphura pretium nostra
-5. Versum urgeturque occupat datque
-6. Obscura frondescere sola Actoriden hostis medius serrae
-
 Pacis timuit Anaxarete corona. Placere inhospita partes? Nunc unde, captare est
 corpora vela omnia absumpsit sonantia saevit et morte! Certamine antiqui.
-
-- A sustinet maternaque quem
-- Aeacidae utque heros
-- Colla Iapygis popularis fertur pallebant gaudet
-- Excutiant iactatis Sol inque
-- Dixerat tellus
-- Ubi data omnia perpessae habet
 
 ## Recepto scorpius
 

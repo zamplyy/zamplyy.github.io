@@ -36,8 +36,4 @@ inveniebantur potente rictus cadit, erat corpus, color. Fuit quam ore
 praestantior aliquo naiades plausu _at iam_ torvo ne Eumolpo tum Ulixes ora ad
 _modo_. Metuit quotiens aethera superis vocant; Ampyciden dis, cum sed.
 
-- Enaesimus vulnus negat capillis nostro accingitur diversas
-- Quid laudavit locus in et se
-- Vocem qui pervenit relinquit dum
-
 Hos ponti tum? Ubi nec sceptra staret credant, ursi silvas foret partes.
