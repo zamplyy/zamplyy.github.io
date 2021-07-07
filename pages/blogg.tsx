@@ -117,7 +117,7 @@ const Blogg = (props: Props) => {
                       key={tag}
                       className="pl-4 py-1 mx-2 my-1 bg-grey-background flex items-center"
                     >
-                      <p className="text-lg pr-4">{tag}</p>
+                      <p className="text-lg pr-4 dark:text-text-color">{tag}</p>
                       <motion.div
                         className="px-4"
                         onClick={() => removeTag(tag)}

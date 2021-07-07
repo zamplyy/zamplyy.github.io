@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "../utils/constants";
 import { RoundButton } from "./roundButton";
 import { motion } from "framer-motion";
+import Coin from "../public/assets/coin.svg";
 
 enum Comparison {
   equal = "equal",
@@ -152,6 +153,10 @@ export function Game() {
   //   [question]
   // );
 
+  const selectedSum =
+    (firstSelectedItem ? firstSelectedItem.price : 0) +
+    (secondSelectedItem ? secondSelectedItem.price : 0);
+
   const validateQuestion = () => {
     if (firstSelectedItem && secondSelectedItem) {
       const selectedSum = firstSelectedItem.price + secondSelectedItem.price;
@@ -262,10 +267,18 @@ export function Game() {
           noDrop
           id="question_item"
         />
+
         <div className="col-span-2 flex justify-center relative">
-          <div className="p-4 bg-accent-3 dark:bg-accent-2 absolute rounded-xl -top-28 left-4 -right-20">
-            <p className="text-base">{BourseTalking()}</p>
-          </div>
+          <p
+            className="text-base font-bold italic absolute -top-32 left-14 p-5 text-center h-32 w-80 dark:text-text-color"
+            style={{
+              backgroundImage: `url("assets/talking_background.svg")`,
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            {BourseTalking()}
+          </p>
           <div className="flex object-contain h-36 justify-center">
             <img src={`assets/${bourseImage()}`}></img>
           </div>
@@ -284,10 +297,21 @@ export function Game() {
           id="second_selected"
           handleDroppedItem={handleDroppedItem}
         />
-        <div className="h-10">
-          <RoundButton
-            color={"bg-accent-2"}
-            text={bourseState !== BourseState.happy ? "KÖP" : "NÄSTA"}
+        <div
+          className={`flex flex-col items-center ${
+            buyDisabled ? "opacity-70" : ""
+          }`}
+        >
+          <div className="border-l-4 border-r-4 border-t-4 rounded-t-xl bg-accent-3 mt-2 border-accent-2 dark:bg-accent-2 dark:border-accent-3">
+            <p className="inline-flex items-center px-2">
+              <span className="pr-2">
+                <Coin />
+              </span>
+              {`${selectedSum} kr`}
+            </p>
+          </div>
+          <motion.button
+            className={`py-4 rounded-xl px-10 bg-accent-2 w-full`}
             onClick={() => {
               if (bourseState === BourseState.happy) {
                 nextQuestion();
@@ -299,8 +323,16 @@ export function Game() {
                 }
               }
             }}
+            whileHover={buyDisabled ? {} : { scale: 1.02 }}
+            whileTap={buyDisabled ? {} : { scale: 0.98 }}
             disabled={buyDisabled}
-          ></RoundButton>
+          >
+            <div className={` flex justify-center `}>
+              <p className="text-white text-xl dark:text-text-color font-jost justify-center">
+                {bourseState !== BourseState.happy ? "KÖP" : "NÄSTA"}
+              </p>
+            </div>
+          </motion.button>
         </div>
         {itemOptions.map((item, i) => (
           <div key={"item_" + item?.id + "_" + i}>
@@ -379,13 +411,18 @@ export function ItemContainerView(props: ItemContainerProps) {
               isOver && canDrop ? "text-white" : "text-black"
             }`}
           >
-            Drag en vara hit!
+            Dra en vara hit!
           </p>
         ) : null}
       </div>
       {showPrice && item ? (
         <div className="border-4 rounded-xl bg-accent-3 mt-2 border-accent-2  dark:bg-accent-2 dark:border-accent-3 ">
-          <p>{`${item?.price} kr`}</p>
+          <p className="inline-flex items-center">
+            <span className="pr-2">
+              <Coin />
+            </span>
+            {`${item?.price} kr`}
+          </p>
         </div>
       ) : null}
     </div>

@@ -175,15 +175,36 @@ const RegretGuide = (props: Props) => {
     );
   };
 
+  const isPositiveResult = () => {
+    const hasReceipt =
+      answers.find(({ question }) => question.id === 4)?.answer.text === "Ja";
+
+    return hasReceipt;
+  };
+
   const renderResults = () => {
+    const isPositive = isPositiveResult();
+
+    const bgColor = isPositive ? "" : "bg-bad";
+    const text = isPositive
+      ? `Den här varan går nog att lämna tillbaka. Ta med dig varan & kvittot till butiken & be om att få lämna tillbaka det du köpt. 
+
+      Du kan spara ditt resultat och ta med dig till butiken som stöd.`
+      : `Den här varan går inte att lämna tillbaka.
+
+      Du kan spara ditt resultat för att komma ihåg varför du inte fick lämna tillbaka varan.`;
+
+    const imageSrc = isPositive
+      ? "/assets/bourse_content.svg"
+      : "/assets/bourse_not_content.svg";
+
     return (
-      <div className="flex flex-col flex-grow px-10 py-12 text-center justify-between">
+      <div
+        className={`flex flex-col flex-grow px-10 py-12 text-center justify-between ${bgColor}`}
+      >
         <div>
           <h2>Resultat</h2>
-          <p>
-            Den här varan går nog att lämna tillbaka. Ta med dig varan & kvittot
-            till butiken & be om att få lämna tillbaka det du köpt.
-          </p>
+          <p className="whitespace-pre-line">{text}</p>
         </div>
         <div className="flex-col flex self-center relative ">
           <RoundButton
@@ -207,7 +228,7 @@ const RegretGuide = (props: Props) => {
               right: -227,
             }}
           >
-            <img src="/assets/bourse_content.svg"></img>
+            <img src={imageSrc}></img>
           </div>
         </div>
       </div>

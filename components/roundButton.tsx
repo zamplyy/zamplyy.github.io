@@ -21,9 +21,9 @@ export function RoundButton(props: Props) {
       disabled={disabled}
     >
       <div
-        className={` flex flex-row  ${icon ? "" : "justify-center"} ${
-          disabled ? "opacity-70" : null
-        }`}
+        className={` flex flex-row items-center ${
+          icon ? "" : "justify-center"
+        } ${disabled ? "opacity-70" : ""}`}
       >
         {icon ? <div className="pr-3">{icon}</div> : null}
         <p className="text-white text-xl dark:text-text-color">{text}</p>
